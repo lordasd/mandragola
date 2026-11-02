@@ -9,5 +9,5 @@
 - axe found the fixed demo banner outside any landmark -> changed to <aside aria-label>.
 - Lighthouse baseline agent: headless runs got the SiteGround challenge; headed Chromium via CDP worked. The auto-mode safety classifier blocked an attempt to spoof the Lighthouse UA in a warm-up visit — dropped, measured honestly instead.
 - AI mistake #3 (deploy): I created the Vercel project with `vercel project add` before the first deploy. The CLI left the framework preset at "Other", so Vercel served only public/ and every page 404'd (static OG image was 200 — the clue). Fixed by committing vercel.json { "framework": "nextjs" } so it's versioned, not a dashboard setting.
-- Code review agent caught: JSON-LD "escape" `.replace(/</g, "\u003c")` was a no-op (JS string "\u003c" is "<"); needed "\u003c". The Edit tool also unescaped it on my first fix attempt — fixed with a script.
+- Code review agent caught: JSON-LD "escape" `.replace(/</g, "\u003c")` was a no-op (JS string "\u003c" is "<"); needed "\\u003c". The Edit tool also unescaped it on my first fix attempt — fixed with a script.
 - SEO agent caught: robots.txt `Disallow: /` would stop crawlers from ever reading noindex → switched to Allow + noindex meta/header.

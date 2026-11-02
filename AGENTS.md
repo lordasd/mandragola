@@ -37,3 +37,12 @@ Demo rebuild of mandragolaltd.com (WordPress) for a recruitment home assignment:
 ## Working in parallel (multi-agent)
 - Each agent edits only the paths it was assigned. Shared files (`components/ui`, `components/layout`, `lib`, `content/types.ts`, `globals.css`) — propose changes in your final report instead of editing, unless assigned.
 - Don't run `npm run build`/`next start` while other agents work (shared `.next`); use `typecheck` + `lint`. Main thread builds, commits, and deploys. Agents never commit.
+
+## Lessons learned (keep these working)
+- Demo banner + header share one sticky bar (`SiteShell`); never give the banner a fixed height or reserve space for it — text wrapping/spacing overrides must not overlap (WCAG 1.4.12).
+- Fonts called in a root layout preload on **every** route. English pair preloads; Hebrew (Heebo, `lib/fonts.he.ts`) is `preload: false`.
+- No decorative image as the hero's LCP — the h1 text is the LCP element.
+- Display headings wrap long words (`Heading` adds `wrap-break-word hyphens-auto`); check 320px after changing titles.
+- Vercel framework preset is pinned in `vercel.json` — don't delete it.
+- Git Bash rewrites `/route` args into Windows paths: pass routes to scripts without the leading slash.
+- `robots.txt` must allow crawling; `noindex` is enforced by meta + `X-Robots-Tag`.
