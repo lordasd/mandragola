@@ -23,6 +23,8 @@ export function Footer({ site, locale, links }: FooterProps) {
   const t = ui[locale];
   const a11yHref = locale === "he" ? "/he/accessibility" : "/accessibility";
   const company = links ?? localizeLinks(site.footerLinks, locale);
+  /** site.* strings are English-only; mark them on /he (WCAG 3.1.2). */
+  const enOnly = locale === "he" ? "en" : undefined;
 
   return (
     <Container as="footer" className="mt-section-gap">
@@ -30,7 +32,9 @@ export function Footer({ site, locale, links }: FooterProps) {
         <div className="grid gap-10 md:grid-cols-3 lg:grid-cols-12">
           <div className="md:col-span-3 lg:col-span-3">
             <Image src={site.logo.src} alt={site.name} width={site.logo.width} height={site.logo.height} className="h-12 w-auto" />
-            <p className="mt-4 max-w-xs text-on-ink-muted">{site.tagline}</p>
+            <p lang={enOnly} className="mt-4 max-w-xs text-on-ink-muted">
+              {site.tagline}
+            </p>
           </div>
 
           <nav aria-label={t.footerNav} className="lg:col-span-3">
@@ -51,13 +55,14 @@ export function Footer({ site, locale, links }: FooterProps) {
             <address className="mt-3 not-italic">
               <p className="flex min-h-11 items-center gap-2 text-on-ink-muted">
                 <PinIcon size={20} className="shrink-0 text-gold" />
-                <span>{site.contact.address}</span>
+                {/* Latin address isolated so RTL bidi keeps "8 HaGavish…" in order */}
+                <bdi lang={enOnly}>{site.contact.address}</bdi>
               </p>
               <a href={`mailto:${site.contact.email}`} className={linkClass}>
                 <MailIcon size={20} className="shrink-0 text-gold" />
                 <span>
                   <span className="sr-only">{t.emailLabel}: </span>
-                  {site.contact.email}
+                  <bdi>{site.contact.email}</bdi>
                 </span>
               </a>
             </address>

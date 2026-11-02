@@ -1,6 +1,8 @@
 import type { Stat } from "@/content/types";
 import { cn } from "@/lib/cn";
 
+const HEBREW = /[֐-׿]/;
+
 interface StatsRowProps {
   stats: Stat[];
   /** Background the row sits on. */
@@ -25,7 +27,10 @@ export function StatsRow({ stats, tone = "light", className }: StatsRowProps) {
           )}
         >
           <dt className={cn("text-eyebrow uppercase", ink ? "text-gold" : "text-muted")}>{stat.label}</dt>
-          <dd className={cn("font-heading text-h3 font-medium", ink ? "text-on-ink" : "text-ink")}>{stat.value}</dd>
+          <dd className={cn("font-heading text-h3 font-medium", ink ? "text-on-ink" : "text-ink")}>
+            {/* Figures like "100+" keep their order inside RTL text (else they render "+100"). */}
+            {HEBREW.test(stat.value) ? stat.value : <span dir="ltr">{stat.value}</span>}
+          </dd>
         </div>
       ))}
     </dl>

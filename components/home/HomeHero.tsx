@@ -17,7 +17,7 @@ export function HomeHero({ hero }: { hero: HomeContent["hero"] }) {
       tone="ink"
       aria-labelledby={id}
       // Brief hero min-height clamp(520px, 70vh, 720px); no spacing token covers a vh range.
-      innerClassName="relative isolate flex min-h-[clamp(32.5rem,70vh,45rem)] items-center overflow-hidden bg-linear-to-br from-ink to-ink-soft"
+      innerClassName="relative isolate flex min-h-[clamp(32.5rem,70vh,45rem)] items-center overflow-hidden bg-linear-to-br from-ink to-ink-soft rtl:bg-linear-to-bl"
     >
       {hero.image && (
         <Image

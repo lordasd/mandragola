@@ -1,9 +1,10 @@
-import { Container } from "@/components/ui/Container";
-import { Heading } from "@/components/ui/Heading";
-import { homeHe } from "@/content/home.he";
-import { buildMetadata } from "@/lib/seo";
+import { HomePage } from "@/components/home/HomePage";
+import { JsonLd } from "@/components/ui/JsonLd";
+import { contactFormHe } from "@/content/contact-form";
+import { homeAccessImageHe, homeClientLogosHe, homeHe } from "@/content/home.he";
+import { site } from "@/content/site";
+import { buildMetadata, organizationLd, websiteLd } from "@/lib/seo";
 
-// Placeholder — replaced by the Hebrew home page agent.
 export const metadata = buildMetadata({
   title: homeHe.seo.title,
   description: homeHe.seo.description,
@@ -15,8 +16,15 @@ export const metadata = buildMetadata({
 
 export default function HebrewHomePage() {
   return (
-    <Container className="py-section-y">
-      <Heading as="h1">{homeHe.hero.title}</Heading>
-    </Container>
+    <>
+      <JsonLd data={[organizationLd(site), websiteLd({ locale: "he" })]} />
+      <HomePage
+        locale="he"
+        content={homeHe}
+        accessImage={homeAccessImageHe}
+        logos={homeClientLogosHe}
+        form={contactFormHe}
+      />
+    </>
   );
 }

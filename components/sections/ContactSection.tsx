@@ -37,7 +37,8 @@ export function ContactSection({ locale, copy, form, className }: ContactSection
               <p className={groupTitle}>{t.footerContact}</p>
               <p className="mt-3 flex items-start gap-3 text-body-md">
                 <PinIcon size={22} className="mt-0.5 shrink-0 text-gold" />
-                <span>{site.contact.address}</span>
+                {/* site address/email are Latin: isolate them so RTL bidi keeps "8 HaGavish…" in order */}
+                <bdi lang={locale === "he" ? "en" : undefined}>{site.contact.address}</bdi>
               </p>
               <a
                 href={`mailto:${site.contact.email}`}
@@ -46,7 +47,7 @@ export function ContactSection({ locale, copy, form, className }: ContactSection
                 <MailIcon size={22} className="shrink-0 text-gold" />
                 <span>
                   <span className="sr-only">{t.emailLabel}: </span>
-                  {site.contact.email}
+                  <bdi>{site.contact.email}</bdi>
                 </span>
               </a>
             </div>
