@@ -2,7 +2,7 @@ import { site } from "./site";
 import type { Link, Locale, PageSeo } from "./types";
 
 /*
- * Accessibility statement copy (EN + HE). Rendered by app/(en)/accessibility/_components/AccessibilityStatement.tsx.
+ * Accessibility statement copy (EN + HE). Rendered by components/legal/AccessibilityStatement.tsx.
  * Types are local for now; candidates to move into content/types.ts.
  */
 
@@ -34,7 +34,7 @@ export interface AccessibilityContent {
   sections: A11ySection[];
 }
 
-const PREPARED = "2026-11-02";
+const UPDATED = "2026-11-02";
 
 export const accessibility: AccessibilityContent = {
   seo: {
@@ -95,10 +95,9 @@ export const accessibility: AccessibilityContent = {
             ["Correct page language and direction: English left-to-right, Hebrew right-to-left."],
             ["Text alternatives for meaningful images; decorative images are hidden from assistive technology."],
             ["Responsive layout that reflows at 320 px width and 400% zoom without horizontal scrolling."],
-            ["Form fields with visible labels, autocomplete hints and status messages announced to screen readers; no CAPTCHA."],
-            ["Animations reduced or removed when the “reduce motion” system setting is on."],
+            ["Form fields with visible labels and autocomplete hints. Errors are described in text next to the field, linked to it for screen readers, and focus moves to the first field that needs attention. Status messages are announced; no CAPTCHA."],
+            ["No carousels, autoplay or parallax. The only motion is smooth scrolling and short color transitions, both turned off when the “reduce motion” system setting is on."],
             ["No accessibility overlay widget: accessibility is built into the markup itself."],
-            ["Automated testing (axe-core, Lighthouse) plus manual keyboard and screen reader (NVDA) checks."],
           ],
         },
       ],
@@ -112,7 +111,7 @@ export const accessibility: AccessibilityContent = {
           items: [
             ["The contact form is a demonstration only: it does not send or store messages."],
             ["Some navigation links lead to pages of the original website, which are outside the scope of this statement."],
-            ["Partner logos are third-party images; their text alternative is the company name only."],
+            ["Partner logos are third-party images. Where a logo stands alone its text alternative is the company name; on transaction cards the logos are decorative because the card heading already names the parties."],
             ["Only the home page and this statement are available in Hebrew."],
           ],
         },
@@ -129,15 +128,44 @@ export const accessibility: AccessibilityContent = {
           ],
         },
         { kind: "contact", emailLabel: "Email:", addressLabel: "Address:", address: site.contact.address },
-        { kind: "p", content: ["Because this is a demo, the contact details are shown as they would appear on a live site."] },
+      ],
+    },
+    {
+      id: "coordinator",
+      title: "Accessibility coordinator",
+      blocks: [
+        {
+          kind: "p",
+          content: ["Accessibility inquiries are handled through the company’s general contact details:"],
+        },
+        { kind: "contact", emailLabel: "Email:", addressLabel: "Address:", address: site.contact.address },
+        {
+          kind: "p",
+          content: [
+            "This is a demo rebuild, so no named accessibility coordinator or phone number is published here. The operator of the official website should add the coordinator’s name, phone number and email.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "testing",
+      title: "How this site was tested",
+      blocks: [
+        {
+          kind: "list",
+          items: [
+            ["Automated axe-core scan (WCAG 2.2 AA rules) of every page at 375 px and 1440 px width, plus Lighthouse accessibility audits of the main pages."],
+            ["Manual keyboard walkthrough of every page, including the mobile menu and the contact form."],
+            ["Reflow check at 320 px width, and a check with the WCAG text-spacing override applied."],
+            ["Check with the “reduce motion” system setting turned on."],
+          ],
+        },
       ],
     },
     {
       id: "date",
       title: "Date",
-      blocks: [
-        { kind: "date", before: "This statement was prepared on ", dateTime: PREPARED, label: "2 November 2026", after: "." },
-      ],
+      blocks: [{ kind: "date", before: "Last updated: ", dateTime: UPDATED, label: "2 November 2026", after: "" }],
     },
   ],
 };
@@ -201,10 +229,9 @@ export const accessibilityHe: AccessibilityContent = {
             ["הגדרת שפה וכיווניות נכונות: עברית מימין לשמאל, אנגלית משמאל לימין."],
             ["טקסט חלופי לתמונות בעלות משמעות; תמונות דקורטיביות מוסתרות מטכנולוגיות מסייעות."],
             ["תצוגה רספונסיבית המתאימה את עצמה לרוחב 320 פיקסלים ולהגדלה של 400% ללא גלילה אופקית."],
-            ["שדות טופס עם תוויות גלויות, השלמה אוטומטית והודעות סטטוס המוקראות לקוראי מסך; ללא CAPTCHA."],
-            ["הפחתה או ביטול של אנימציות כאשר הגדרת \"הפחתת תנועה\" פעילה במערכת."],
+            ["שדות טופס עם תוויות גלויות והשלמה אוטומטית. שגיאות מתוארות בטקסט ליד השדה, מקושרות אליו עבור קוראי מסך, והמיקוד עובר לשדה הראשון שדורש תיקון. הודעות סטטוס מוקראות; ללא CAPTCHA."],
+            ["ללא קרוסלות, הפעלה אוטומטית או אפקט פרלקסה. התנועה היחידה היא גלילה חלקה ומעברי צבע קצרים, ושניהם מבוטלים כאשר הגדרת \"הפחתת תנועה\" פעילה במערכת."],
             ["ללא תוסף נגישות חיצוני: הנגישות מובנית בקוד האתר עצמו."],
-            ["בדיקות אוטומטיות (axe-core, Lighthouse) ובדיקות ידניות במקלדת ובקורא מסך (NVDA)."],
           ],
         },
       ],
@@ -218,7 +245,7 @@ export const accessibilityHe: AccessibilityContent = {
           items: [
             ["טופס יצירת הקשר הוא להדגמה בלבד: הודעות אינן נשלחות ואינן נשמרות."],
             ["חלק מקישורי הניווט מובילים לעמודים באתר המקורי, שאינם כלולים בהצהרה זו."],
-            ["לוגואים של שותפים הם תמונות של צד שלישי; הטקסט החלופי שלהם הוא שם החברה בלבד."],
+            ["לוגואים של שותפים הם תמונות של צד שלישי. כאשר לוגו מופיע לבדו, הטקסט החלופי שלו הוא שם החברה; בכרטיסי העסקאות הלוגואים דקורטיביים, משום שכותרת הכרטיס כבר מציינת את הצדדים."],
             ["בעברית זמינים רק דף הבית והצהרה זו; שאר העמודים זמינים באנגלית."],
           ],
         },
@@ -235,13 +262,41 @@ export const accessibilityHe: AccessibilityContent = {
           ],
         },
         { kind: "contact", emailLabel: "דוא\"ל:", addressLabel: "כתובת:", address: "הגביש 8, נתניה" },
-        { kind: "p", content: ["מאחר שזהו אתר הדגמה, פרטי הקשר מוצגים כפי שהיו מופיעים באתר חי."] },
+      ],
+    },
+    {
+      id: "coordinator",
+      title: "רכז/ת נגישות",
+      blocks: [
+        { kind: "p", content: ["פניות בנושא נגישות מטופלות דרך פרטי הקשר הכלליים של החברה:"] },
+        { kind: "contact", emailLabel: "דוא\"ל:", addressLabel: "כתובת:", address: "הגביש 8, נתניה" },
+        {
+          kind: "p",
+          content: [
+            "זהו אתר הדגמה, ולכן לא מפורסמים כאן שם של רכז/ת נגישות או מספר טלפון. על מפעיל האתר הרשמי להוסיף את שם הרכז/ת, מספר הטלפון וכתובת הדוא\"ל.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "testing",
+      title: "כיצד נבדק האתר",
+      blocks: [
+        {
+          kind: "list",
+          items: [
+            ["סריקה אוטומטית ב־axe-core (כללי WCAG 2.2 AA) של כל העמודים ברוחב 375 ו־1440 פיקסלים, וכן בדיקות נגישות של Lighthouse בעמודים המרכזיים."],
+            ["מעבר ידני במקלדת בכל העמודים, כולל התפריט בנייד וטופס יצירת הקשר."],
+            ["בדיקת התאמה לרוחב 320 פיקסלים, ובדיקה עם הגדרות ריווח הטקסט של WCAG."],
+            ["בדיקה כאשר הגדרת \"הפחתת תנועה\" פעילה במערכת."],
+          ],
+        },
       ],
     },
     {
       id: "date",
       title: "תאריך",
-      blocks: [{ kind: "date", before: "ההצהרה הוכנה בתאריך ", dateTime: PREPARED, label: "2 בנובמבר 2026", after: "." }],
+      blocks: [{ kind: "date", before: "עדכון אחרון: ", dateTime: UPDATED, label: "2 בנובמבר 2026", after: "" }],
     },
   ],
 };
