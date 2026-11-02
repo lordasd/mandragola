@@ -12,7 +12,7 @@ Recruitment demo, not the official site: every page has the demo banner and is `
 ## Lighthouse (mobile, median of 3, Lighthouse 13.6)
 | Page | Performance | Accessibility | Best practices | SEO |
 |---|---|---|---|---|
-| Home: original → rebuild | 81 → **95** | 94 → **100** | 73 → **100** | 92 → 69* |
+| Home: original → rebuild | 81 → **93–95** | 94 → **100** | 73 → **100** | 92 → 69* |
 | Expertise | n/a → **95** | 94 → **100** | 73 → **100** | 85 → 69* |
 | Transactions | 98† → **96** | 94 → **100** | 73 → **100** | 85 → 69* |
 
