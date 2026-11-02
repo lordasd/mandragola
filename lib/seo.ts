@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import type { Locale, SiteContent } from "@/content/types";
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://mandragola-rebuild.vercel.app").replace(/\/$/, "");
+// Explicit env var wins; on Vercel fall back to the project's production domain.
+const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (productionHost ? `https://${productionHost}` : "https://mandragola-rebuild.vercel.app")
+).replace(/\/$/, "");
 export const SITE_NAME = "Mandragola Ltd";
 
 /** Demo build: never indexed (assignment rule). Everything else is production-grade SEO. */
