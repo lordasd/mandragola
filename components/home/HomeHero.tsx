@@ -22,7 +22,7 @@ export function HomeHero({ hero }: { hero: HomeContent["hero"] }) {
         aria-hidden="true"
         className="absolute inset-0 -z-10 bg-ink/85 lg:bg-transparent lg:from-ink/90 lg:via-ink/80 lg:to-ink/50 ltr:lg:bg-linear-to-r rtl:lg:bg-linear-to-l"
       />
-      <div className="max-w-180">
+      <div className="min-w-0 max-w-180">
         {hero.eyebrow && <Eyebrow tone="ink">{hero.eyebrow}</Eyebrow>}
         <Heading as="h1" id={id} className="mt-4.5 uppercase tracking-wide">
           {hero.title}

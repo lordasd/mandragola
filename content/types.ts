@@ -5,6 +5,10 @@ export type Locale = "en" | "he";
 export interface Link {
   label: string;
   href: string;
+  /** Language of the target page when it differs from the current page (e.g. English-only pages linked from /he). */
+  hrefLang?: Locale;
+  /** Screen-reader-only suffix announcing that language, e.g. " (באנגלית)". Render inside the link in an sr-only span. */
+  srSuffix?: string;
 }
 
 export interface ImageAsset {
@@ -110,4 +114,6 @@ export interface ContactFormCopy {
   submitLabel: string;
   requiredNote: string;
   demoNotice: string; // shown after "submit": nothing was sent
+  /** Inline validation messages, shown as text under the field (WCAG 3.3.1/3.3.3). */
+  errors: { nameRequired: string; emailRequired: string; emailInvalid: string; messageRequired: string };
 }

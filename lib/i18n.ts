@@ -1,5 +1,5 @@
 import { site, siteHe } from "@/content/site";
-import type { Locale, SiteContent } from "@/content/types";
+import type { Link, Locale, SiteContent } from "@/content/types";
 
 /** UI chrome strings (not page content). Page copy lives in content/*.ts. */
 export interface UiStrings {
@@ -13,7 +13,7 @@ export interface UiStrings {
   footerNav: string;
   accessibility: string;
   emailLabel: string;
-  switchLanguage: { label: string; href: string; hrefLang: Locale; lang: Locale };
+  switchLanguage: { label: string; hrefLang: Locale; lang: Locale };
   /** Banner text for locales whose site content is English-only. */
   demoBanner: string;
   demoBannerLabel: string;
@@ -43,7 +43,7 @@ export const ui: Record<Locale, UiStrings> = {
     footerNav: "Footer",
     accessibility: "Accessibility statement",
     emailLabel: "Email",
-    switchLanguage: { label: "עברית", href: "/he", hrefLang: "he", lang: "he" },
+    switchLanguage: { label: "עברית", hrefLang: "he", lang: "he" },
     demoBanner: "Demo for a recruitment assignment — not the official Mandragola website",
     demoBannerLabel: "Demo notice",
     formHint: "This is a demo — messages are not sent or stored.",
@@ -64,7 +64,7 @@ export const ui: Record<Locale, UiStrings> = {
     footerNav: "תחתית",
     accessibility: "הצהרת נגישות",
     emailLabel: "דוא״ל",
-    switchLanguage: { label: "English", href: "/", hrefLang: "en", lang: "en" },
+    switchLanguage: { label: "English", hrefLang: "en", lang: "en" },
     demoBanner: "אתר הדגמה למטלת גיוס — אינו האתר הרשמי של מנדרגולה",
     demoBannerLabel: "הודעת הדגמה",
     formHint: "זהו אתר הדגמה — הודעות אינן נשלחות או נשמרות.",
@@ -83,13 +83,25 @@ const heLinkLabels: Record<string, string> = {
   Contact: "צרו קשר",
 };
 
-export function localizeLinks<T extends { label: string; href: string }>(links: T[], locale: Locale): T[] {
+/** sr-only suffix for /he links whose target page is English-only (labels stay clean visually). */
+const EN_ONLY_SUFFIX = " (באנגלית)";
+
+/**
+ * Hebrew labels/hrefs for site.nav / site.footerLinks. Links that stay English-only from /he
+ * (Expertise, Transactions and the original-site pages) get `hrefLang: "en"` + `srSuffix`.
+ */
+export function localizeLinks<T extends Link>(links: T[], locale: Locale): T[] {
   if (locale === "en") return links;
-  return links.map((l) => ({
-    ...l,
-    label: heLinkLabels[l.label] ?? l.label,
-    href: l.href === "/" ? "/he" : l.href === "/#contact" ? "/he#contact" : l.href,
-  }));
+  return links.map((l) => {
+    const href = l.href === "/" ? "/he" : l.href === "/#contact" ? "/he#contact" : l.href;
+    const englishOnly = !(href === "/he" || href.startsWith("/he/") || href.startsWith("/he#"));
+    return {
+      ...l,
+      label: heLinkLabels[l.label] ?? l.label,
+      href,
+      ...(englishOnly && { hrefLang: "en" as const, srSuffix: EN_ONLY_SUFFIX }),
+    };
+  });
 }
 
 /** Label of an internal site link (site.footerLinks / site.nav) by href, e.g. for breadcrumbs. Falls back to the href. */

@@ -3,10 +3,11 @@ import { cn } from "@/lib/cn";
 
 type Level = "h1" | "h2" | "h3" | "h4";
 
+// Display sizes: long single words (uppercase EN titles) must wrap at 320px / 400% zoom (WCAG 1.4.10).
 const sizeClass: Record<Level, string> = {
-  h1: "text-h1",
-  h2: "text-h2",
-  h3: "text-h3",
+  h1: "text-h1 hyphens-auto wrap-break-word",
+  h2: "text-h2 hyphens-auto wrap-break-word",
+  h3: "text-h3 hyphens-auto wrap-break-word",
   h4: "text-h4",
 };
 

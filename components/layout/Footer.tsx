@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 import { MailIcon, PinIcon } from "@/components/ui/icons";
 import { COPYRIGHT_YEAR, localizeLinks, siteText, ui } from "@/lib/i18n";
+import { LanguageLink } from "./LanguageLink";
 
 interface FooterProps {
   site: SiteContent;
@@ -36,8 +37,9 @@ export function Footer({ site, locale }: FooterProps) {
             <ul className="mt-3">
               {company.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className={linkClass}>
+                  <Link href={link.href} hrefLang={link.hrefLang} className={linkClass}>
                     {link.label}
+                    {link.srSuffix && <span className="sr-only">{link.srSuffix}</span>}
                   </Link>
                 </li>
               ))}
@@ -79,14 +81,11 @@ export function Footer({ site, locale }: FooterProps) {
           <p>
             © {COPYRIGHT_YEAR} {site.name}. {t.demoRebuild}
           </p>
-          <a
-            href={t.switchLanguage.href}
-            hrefLang={t.switchLanguage.hrefLang}
-            lang={t.switchLanguage.lang}
+          <LanguageLink
+            locale={locale}
+            language={t.switchLanguage}
             className="inline-flex min-h-11 items-center text-on-ink-muted hover:text-on-ink hover:underline"
-          >
-            {t.switchLanguage.label}
-          </a>
+          />
         </div>
       </div>
     </Container>

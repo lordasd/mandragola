@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
-import type { Link as NavItem } from "@/content/types";
+import type { Link as NavItem, Locale } from "@/content/types";
 import { CloseIcon, MenuIcon } from "@/components/ui/icons";
+import { LanguageLink } from "./LanguageLink";
 import { NavLink } from "./NavLink";
 
 interface MobileNavProps {
@@ -12,14 +13,18 @@ interface MobileNavProps {
   navLabel: string;
   openLabel: string;
   closeLabel: string;
-  language: { label: string; href: string; hrefLang: string; lang: string };
+  language: { label: string; hrefLang: string; lang: string };
+  locale: Locale;
 }
 
 const rowClass =
   "flex min-h-14 items-center border-b border-line-on-ink font-heading text-body-xl text-on-ink hover:text-gold aria-[current=page]:text-gold";
 
-/** Disclosure menu below lg. Esc closes and returns focus to the toggle; link click closes. No focus trap. */
-export function MobileNav({ items, cta, navLabel, openLabel, closeLabel, language }: MobileNavProps) {
+/**
+ * Disclosure menu below lg. Esc closes and returns focus to the toggle; link click or tabbing out of the
+ * menu closes it (so the open panel never covers the next focused element). No focus trap.
+ */
+export function MobileNav({ items, cta, navLabel, openLabel, closeLabel, language, locale }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const panelId = useId();
@@ -39,7 +44,12 @@ export function MobileNav({ items, cta, navLabel, openLabel, closeLabel, languag
   const close = () => setOpen(false);
 
   return (
-    <div className="lg:hidden">
+    <div
+      className="lg:hidden"
+      onBlur={(e) => {
+        if (open && !e.currentTarget.contains(e.relatedTarget as Node | null)) close();
+      }}
+    >
       <button
         ref={buttonRef}
         type="button"
@@ -60,8 +70,9 @@ export function MobileNav({ items, cta, navLabel, openLabel, closeLabel, languag
           <ul>
             {items.map((item) => (
               <li key={item.href}>
-                <NavLink href={item.href} onClick={close} className={rowClass}>
+                <NavLink href={item.href} hrefLang={item.hrefLang} onClick={close} className={rowClass}>
                   {item.label}
+                  {item.srSuffix && <span className="sr-only">{item.srSuffix}</span>}
                 </NavLink>
               </li>
             ))}
@@ -71,9 +82,7 @@ export function MobileNav({ items, cta, navLabel, openLabel, closeLabel, languag
               </Link>
             </li>
             <li>
-              <a href={language.href} hrefLang={language.hrefLang} lang={language.lang} className={`${rowClass} border-b-0`}>
-                {language.label}
-              </a>
+              <LanguageLink locale={locale} language={language} className={`${rowClass} border-b-0`} />
             </li>
           </ul>
         </nav>

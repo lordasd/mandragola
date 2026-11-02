@@ -78,7 +78,7 @@
   --radius-pill: 999px;
 }
 
-/* next/font sets --font-display / --font-text on <html> per locale (EN: EB Garamond + Spline Sans, HE: Frank Ruhl Libre + Assistant) */
+/* next/font sets --font-display / --font-text on <html> per locale (EN: EB Garamond + Spline Sans; HE: Heebo for both, see :lang(he) below) */
 @theme inline {
   --font-serif: var(--font-display), Georgia, serif;
   --font-heading: var(--font-display), Georgia, serif;
@@ -86,14 +86,16 @@
 }
 
 :root {
+  /* Estimate of the banner's height, used only for scroll-padding / menu max-height (the banner itself
+     sizes to its text). One line >=600px, two lines below. */
   --banner-h: 2.5rem; /* 40 */
   --header-h: 5rem; /* 64 bar + 16 outer padding */
   --focus-ring: var(--color-focus);
 }
 
-@media (max-width: 24.99rem) {
+@media (max-width: 37.49rem) {
   :root {
-    --banner-h: 3.5rem; /* banner wraps to 2 lines under 400px */
+    --banner-h: 3.5rem; /* banner wraps to 2 lines under 600px */
   }
 }
 
@@ -111,14 +113,13 @@
 
 @layer base {
   html {
-    /* Focus/anchors never hide under fixed banner + sticky header (WCAG 2.4.11) */
+    /* Focus/anchors never hide under the sticky banner + header (WCAG 2.4.11) */
     scroll-padding-top: calc(var(--banner-h) + var(--header-h) + 1rem);
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
 
   body {
-    padding-top: var(--banner-h);
     background-color: var(--color-surface);
     color: var(--color-text);
     font-family: var(--font-sans);
@@ -171,6 +172,11 @@
   :lang(he) :is(h1, h2, h3, h4) {
     line-height: 1.25;
   }
+}
+
+/* Hebrew: headings use the same family as body text (Heebo); lib/fonts.he.ts only sets --font-text. */
+:root:lang(he) {
+  --font-display: var(--font-text);
 }
 
 /*
