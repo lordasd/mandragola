@@ -1,4 +1,4 @@
-import { AccessibilityStatement } from "@/app/(en)/accessibility/_components/AccessibilityStatement";
+import { AccessibilityStatement } from "@/components/legal/AccessibilityStatement";
 import { accessibilityAlternates, accessibilityHe } from "@/content/accessibility";
 import { buildMetadata } from "@/lib/seo";
 

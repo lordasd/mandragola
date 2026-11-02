@@ -16,11 +16,13 @@ Demo rebuild of mandragolaltd.com (WordPress) for a recruitment home assignment:
 - `npm run dev` — dev server (port 3000)
 - `npm run typecheck` / `npm run lint` — run before handing work back
 - `npm run build` then `npx next start -p 3100` — production build/serve
+- `npm run screenshots -- http://localhost:3100 <outDir>` — full-page screenshots, mobile + desktop
+- `npm run og` — regenerate OG images in `public/og/`
 - `npm run a11y -- http://localhost:3100 [routes…]` — axe WCAG 2.2 AA scan, mobile + desktop. Routes without leading slash (`home expertise he`); no routes = all.
 
 ## Layout
 - `app/(en)/…` and `app/(he)/he/…` — two root layouts (`lang`/`dir` differ). `app/global-not-found.tsx` handles unmatched URLs.
-- `components/ui/*` primitives, `components/layout/*` shell (SiteShell, Header, MobileNav, NavLink, Footer, LegalPage), `components/<page>/*` page sections.
+- `components/ui/*` primitives, `components/sections/*` cross-page sections, `components/layout/*` shell (SiteShell, Header, MobileNav, NavLink, Footer, LegalPage, NotFoundBody), `components/legal/*` accessibility statement, `components/<page>/*` page sections.
 - `content/*.ts` — all copy, typed by `content/types.ts`. `lib/seo.ts` metadata + JSON-LD builders, `lib/i18n.ts` UI strings, `lib/fonts.ts`, `lib/cn.ts`.
 - `docs/design-brief.md` — tokens, contrast matrix, component specs. `docs/original-audit.md`, `docs/lighthouse/` — before/after data.
 

@@ -1,6 +1,6 @@
 import { accessibility, accessibilityAlternates } from "@/content/accessibility";
 import { buildMetadata } from "@/lib/seo";
-import { AccessibilityStatement } from "./_components/AccessibilityStatement";
+import { AccessibilityStatement } from "@/components/legal/AccessibilityStatement";
 
 export const metadata = buildMetadata({
   title: accessibility.seo.title,

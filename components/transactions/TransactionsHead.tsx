@@ -1,8 +1,7 @@
-import Image from "next/image";
+import { MarkerLine } from "@/components/ui/MarkerLine";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
-import { markerLine } from "@/content/site";
 
 /** Page head on a sunken section card: eyebrow → h1 → marker line → lead paragraphs. */
 export function TransactionsHead({
@@ -26,16 +25,7 @@ export function TransactionsHead({
       <Heading as="h1" id={id} className={uppercase ? "mt-4 uppercase tracking-[0.02em] text-ink" : "mt-4 text-ink"}>
         {title}
       </Heading>
-      <Image
-        src={markerLine.src}
-        alt=""
-        aria-hidden="true"
-        width={markerLine.width}
-        height={markerLine.height}
-        sizes="(min-width: 1024px) 280px, 200px"
-        loading="lazy"
-        className="mt-2 h-auto w-50 lg:w-70"
-      />
+      <MarkerLine className="mt-2" />
       <div className="mt-6 max-w-lead space-y-4 text-body-xl text-muted">
         {lead.map((p) => (
           <p key={p}>{p}</p>

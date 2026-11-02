@@ -6,8 +6,6 @@ import { Card } from "@/components/ui/Card";
 export interface TransactionCardLabels {
   /** "Mandragola's role" */
   role: string;
-  /** Screen-reader-only joiner between two party logos, e.g. "and". */
-  and: string;
   /** Screen-reader-only prefix for the status badge, e.g. "Status:". */
   status: string;
   /** Screen-reader-only name of the chips list, e.g. "Sector and deal type". */

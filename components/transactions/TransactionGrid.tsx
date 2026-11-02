@@ -14,7 +14,7 @@ export function TransactionGrid({
   listLabel: string;
 }) {
   return (
-    <Container className="py-[calc(var(--spacing-section-gap)/2)]">
+    <Container className="py-section-gap-half">
       <ul aria-label={listLabel} className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-7.5">
         {items.map((item) => (
           <li key={item.id}>

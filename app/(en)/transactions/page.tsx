@@ -7,9 +7,8 @@ import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Container } from "@/components/ui/Container";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { home } from "@/content/home";
-import { site } from "@/content/site";
 import { transactions } from "@/content/transactions";
-import { ui } from "@/lib/i18n";
+import { linkLabel, ui } from "@/lib/i18n";
 import { breadcrumbLd, buildMetadata, itemListLd } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -22,7 +21,6 @@ export const metadata = buildMetadata({
 
 const t = ui.en;
 
-const linkLabel = (href: string) => site.footerLinks.find((l) => l.href === href)?.label ?? href;
 
 const trail = [
   { name: linkLabel("/"), path: "/" },
@@ -55,7 +53,7 @@ export default function TransactionsPage() {
         title={transactions.hero.title}
         lead={splitLead(transactions.hero.body)}
       />
-      <Container className="py-[calc(var(--spacing-section-gap)/2)]">
+      <Container className="py-section-gap-half">
         <StatsRow stats={home.stats} />
       </Container>
       <TransactionGrid items={transactions.items} labels={t.transaction} listLabel={transactions.hero.title} />
