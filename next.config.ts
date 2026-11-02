@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ["image/avif", "image/webp"],
+    // Optimized images are content-addressed by query; cache them for 31 days instead of revalidating.
+    minimumCacheTTL: 2678400,
   },
   async headers() {
     return [
@@ -17,6 +19,11 @@ const nextConfig: NextConfig = {
         // Demo build: keep every response out of search indexes (assignment rule)
         source: "/:path*",
         headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+      {
+        // Logos/photos in public/images rarely change: 1 day fresh, then serve stale while revalidating.
+        source: "/images/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }],
       },
     ];
   },
