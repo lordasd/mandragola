@@ -3,7 +3,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
 
-/** Page head on a sunken section card: eyebrow → h1 → marker line → lead paragraphs. */
+/** Page head on a sunken section card: eyebrow → h1 → marker line → lead paragraphs. Above the fold, so no reveal. */
 export function TransactionsHead({
   id,
   eyebrow,
@@ -19,7 +19,7 @@ export function TransactionsHead({
   uppercase?: boolean;
 }) {
   return (
-    <Section tone="sunken" aria-labelledby={id}>
+    <Section tone="sunken" aria-labelledby={id} reveal={false}>
       <Eyebrow>{eyebrow}</Eyebrow>
       {/* tracking-[0.02em]: brief §2 caps tracking for EN page titles; no scale token for it */}
       <Heading as="h1" id={id} className={uppercase ? "mt-4 uppercase tracking-[0.02em] text-ink" : "mt-4 text-ink"}>

@@ -193,6 +193,35 @@
   }
 }
 
+/*
+ * Scroll reveal (brief §7): a short 12px rise as a block enters the viewport. Transform-only on purpose: an
+ * opacity fade left near-fold blocks half-transparent at load and failed axe color-contrast. CSS-only (scroll-driven
+ * animation, no JS). Gated twice: motion-safe users only, and only where view() timelines exist; everyone
+ * else (Firefox, reduced motion) gets static, fully visible content. Lives in the utilities layer so it
+ * sits with Tailwind's own utilities. Elements already past 60% of their entry at load (anything in the
+ * first viewport) render at the end state, but the LCP hero and page heads opt out anyway (reveal={false}).
+ */
+@keyframes reveal-in {
+  from {
+    translate: 0 12px;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+@layer utilities {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .reveal {
+        animation: reveal-in linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 60%;
+      }
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

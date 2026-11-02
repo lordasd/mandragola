@@ -41,14 +41,14 @@ function PartyMark({ party }: { party: Party }) {
   );
 }
 
-/** One deal. An <article>, not a link (there are no detail pages). */
+/** One deal. An <article>, not a link (there are no detail pages). `.reveal`: each card runs on its own view timeline, so a row staggers naturally. */
 export function TransactionCard({ item, labels }: { item: Transaction; labels: TransactionCardLabels }) {
   const hasLogo = item.parties.some((p) => p.logo);
   const title = partyNames(item);
   return (
     <Card
       as="article"
-      className="flex h-full flex-col gap-5 motion-safe:transition-colors motion-safe:duration-150 hover:border-line-strong"
+      className="reveal flex h-full flex-col gap-5 motion-safe:transition-colors motion-safe:duration-150 hover:border-line-strong"
     >
       {/* h2 = party names (page outline: h1 → card h2s → CTA h2). Visually the logo row carries it. */}
       {hasLogo ? (

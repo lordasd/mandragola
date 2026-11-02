@@ -7,12 +7,12 @@ import { cn } from "@/lib/cn";
 
 type Area = ExpertiseContent["areas"][number];
 
-/** One alternating image/text row (brief §4). Image first on mobile; even rows put the image at the end ≥1024. */
+/** One alternating image/text row (brief §4). Image first on mobile; even rows put the image at the end ≥1024. Scroll reveal per row (`.reveal`). */
 function ExpertiseRow({ area, reverse }: { area: Area; reverse: boolean }) {
   const titleId = `${area.id}-title`;
   const Icon = area.icon ? featureIcons[area.icon] : null;
   return (
-    <section id={area.id} aria-labelledby={titleId} className="grid items-center gap-8 lg:grid-cols-2 lg:gap-15">
+    <section id={area.id} aria-labelledby={titleId} className="reveal grid items-center gap-8 lg:grid-cols-2 lg:gap-15">
       {area.image && (
         <div className={cn(reverse && "lg:order-last")}>
           <Image

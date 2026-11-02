@@ -39,3 +39,6 @@ Source of truth: `docs/design-brief.md` (tokens, contrast matrix, component spec
 
 ## Motion
 - 150ms color/border transitions only, inside `@media (prefers-reduced-motion: no-preference)`. No carousels, parallax, counters, autoplay.
+- One scroll reveal, CSS-only: the `.reveal` utility in `globals.css` (keyframes `reveal-in`: transform-only 12px rise — **no opacity**, a fade left near-fold text half-transparent and failed axe contrast; `animation-timeline: view()`, range `entry 0% entry 60%`). Gated by `prefers-reduced-motion: no-preference` **and** `@supports (animation-timeline: view())`; elsewhere content is static and fully visible. No JS, no IntersectionObserver.
+- `Section` adds `.reveal` to its inner element by default. Pass `reveal={false}` for anything in the first viewport at load: the home hero (LCP h1) and page heads (`TransactionsHead`). `ExpertiseHead` and `LegalPage` don't use `.reveal`.
+- Per-item reveal only on transaction cards and expertise rows (each has its own view timeline = natural stagger). Never nest `.reveal` inside a revealing `Section`, never on the h1/LCP, and re-run `npm run a11y` after changing distance/range.

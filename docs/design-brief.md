@@ -246,6 +246,20 @@ the original's beige triangle.
 ## 7. Motion
 
 Minimal: color/border transitions 150ms ease-out on interactive elements; mobile panel opacity+translateY(−4px)
-150ms; optional one-time fade-up (opacity 0→1, 8px) of section headings via CSS `@starting-style`/no JS. No
-parallax, autoplay, carousels or counters. Wrap all in
+150ms. No parallax, autoplay, carousels or counters. Wrap all in
 `@media (prefers-reduced-motion: no-preference)`; under `reduce` everything is instant and `scroll-behavior: auto`.
+
+**Scroll reveal (CSS-only).** `.reveal` (in `app/globals.css`) runs keyframes `reveal-in` — `translate: 0 12px → 0`
+only, linear, `fill-mode: both` — on a scroll-driven `animation-timeline: view()` with
+`animation-range: entry 0% entry 60%`, so a block finishes rising once 60% of its entry is done and simply
+follows the scroll (no duration, no JS). Constraints:
+- Gated by `@media (prefers-reduced-motion: no-preference)` and `@supports (animation-timeline: view())`.
+  Reduced motion and browsers without view timelines (Firefox today) get static, fully visible content.
+- `Section` applies it to its inner card/container by default (`reveal` prop, default `true`). Above-the-fold
+  blocks opt out with `reveal={false}`: home hero (the h1 is the LCP element and is never animated) and the
+  page heads on /transactions; the /expertise and legal page heads never use it.
+- Per-item: each transaction card and each expertise row carries `.reveal`; their own timelines stagger a row.
+  No nesting inside a revealing section.
+- Transform-only, no opacity: an opacity fade was tried and failed axe color-contrast at 1440×900 (blocks partly
+  entered at load sat half-transparent: home mission card, first /expertise row). Re-run `npm run a11y` after any
+  change to the keyframes or range.

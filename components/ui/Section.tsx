@@ -18,6 +18,11 @@ type SectionProps = Omit<ComponentPropsWithoutRef<"section">, "children"> & {
   tone?: Tone;
   /** Extra classes for the inner (card / container) element. */
   innerClassName?: string;
+  /**
+   * Scroll reveal on the inner element (`.reveal`, CSS-only, motion-safe + view() support only). Default true.
+   * Pass false for anything in the first viewport at load: the hero (LCP h1) and page heads.
+   */
+  reveal?: boolean;
 };
 
 /**
@@ -29,6 +34,7 @@ export function Section({
   tone = "raised",
   className,
   innerClassName,
+  reveal = true,
   children,
   ...props
 }: SectionProps) {
@@ -37,7 +43,12 @@ export function Section({
       <section className={cn("py-section-gap-half", className)} {...props}>
         <Container>
           <div
-            className={cn("rounded-section px-section-x py-section-y", toneClass[tone], innerClassName)}
+            className={cn(
+              "rounded-section px-section-x py-section-y",
+              toneClass[tone],
+              reveal && "reveal",
+              innerClassName,
+            )}
           >
             {children}
           </div>
@@ -48,7 +59,7 @@ export function Section({
 
   return (
     <section className={cn("py-section-y", toneClass[tone], className)} {...props}>
-      <Container className={innerClassName}>{children}</Container>
+      <Container className={cn(reveal && "reveal", innerClassName)}>{children}</Container>
     </section>
   );
 }
