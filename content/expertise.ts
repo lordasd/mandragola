@@ -60,6 +60,6 @@ export const expertise: ExpertiseContent = {
   cta: {
     title: "Capital. Access. Strategic execution.",
     body: "The right relationships, sound judgment, and disciplined execution are what turn opportunity into progress.",
-    link: { label: "Contact us", href: "/#contact" },
+    link: { label: "Contact us", href: "#contact" },
   },
 };
