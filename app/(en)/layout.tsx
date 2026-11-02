@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import "../globals.css";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { site } from "@/content/site";
-import { enFontVars } from "@/lib/fonts";
+import { enFontVars } from "@/lib/fonts.en";
 import { NO_INDEX, SITE_URL } from "@/lib/seo";
 import { THEME_COLOR } from "@/lib/theme";
 

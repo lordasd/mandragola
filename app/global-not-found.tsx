@@ -4,7 +4,7 @@ import { NotFoundBody } from "@/components/layout/NotFoundBody";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { notFound } from "@/content/not-found";
 import { site } from "@/content/site";
-import { enFontVars } from "@/lib/fonts";
+import { enFontVars } from "@/lib/fonts.en";
 import { NO_INDEX, SITE_URL } from "@/lib/seo";
 import { THEME_COLOR } from "@/lib/theme";
 

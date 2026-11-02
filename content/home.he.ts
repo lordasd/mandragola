@@ -16,12 +16,6 @@ export const homeHe: HomeContent = {
     subtitle: "מחברים בין הון, קשרים עסקיים והזדמנויות בתחומי התעופה, החלל והביטחון (A&D) והטכנולוגיה",
     cta: { label: "החזון שלנו", href: `${ORIGIN}/our-mission/` },
     secondaryCta: { label: "לצפייה בעסקאות", href: "/transactions" },
-    image: {
-      src: "/images/home/hero-gradient.webp",
-      alt: "",
-      width: 1920,
-      height: 445,
-    },
   },
   mission: {
     eyebrow: "החזון שלנו",

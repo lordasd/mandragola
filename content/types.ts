@@ -55,7 +55,7 @@ export interface SiteContent {
 
 export interface HomeContent {
   seo: PageSeo;
-  hero: { eyebrow?: string; title: string; subtitle: string; cta: Link; secondaryCta?: Link; image?: ImageAsset };
+  hero: { eyebrow?: string; title: string; subtitle: string; cta: Link; secondaryCta?: Link };
   mission: { eyebrow: string; title: string; body: string; image?: ImageAsset };
   stats: Stat[];
   philosophy: { title: string; body: string };

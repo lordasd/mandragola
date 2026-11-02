@@ -24,13 +24,6 @@ export const home: HomeContent = {
     // Original button pointed to /our-mission-about-new/ (404); fixed to the live page.
     cta: { label: "Our Mission", href: `${ORIGIN}/our-mission/` },
     secondaryCta: { label: "Discover Transactions", href: "/transactions" },
-    // Original hero is a background video over this green gradient; the gradient is the static fallback.
-    image: {
-      src: "/images/home/hero-gradient.webp",
-      alt: "",
-      width: 1920,
-      height: 445,
-    },
   },
   mission: {
     eyebrow: "Our Mission",

@@ -23,7 +23,7 @@ Demo rebuild of mandragolaltd.com (WordPress) for a recruitment home assignment:
 ## Layout
 - `app/(en)/…` and `app/(he)/he/…` — two root layouts (`lang`/`dir` differ). `app/global-not-found.tsx` handles unmatched URLs.
 - `components/ui/*` primitives, `components/sections/*` cross-page sections, `components/layout/*` shell (SiteShell, Header, MobileNav, NavLink, Footer, LegalPage, NotFoundBody), `components/legal/*` accessibility statement, `components/<page>/*` page sections.
-- `content/*.ts` — all copy, typed by `content/types.ts`. `lib/seo.ts` metadata + JSON-LD builders, `lib/i18n.ts` UI strings, `lib/fonts.ts`, `lib/cn.ts`.
+- `content/*.ts` — all copy, typed by `content/types.ts`. `lib/seo.ts` metadata + JSON-LD builders, `lib/i18n.ts` UI strings, `lib/fonts.{en,he}.ts` (one module per locale so only that locale's fonts preload), `lib/cn.ts`.
 - `docs/design-brief.md` — tokens, contrast matrix, component specs. `docs/original-audit.md`, `docs/lighthouse/` — before/after data.
 
 ## Detailed rules (auto-loaded by path)
