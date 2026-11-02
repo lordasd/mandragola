@@ -1,9 +1,10 @@
-import { Container } from "@/components/ui/Container";
-import { Heading } from "@/components/ui/Heading";
-import { home } from "@/content/home";
-import { buildMetadata } from "@/lib/seo";
+import { HomePage } from "@/components/home/HomePage";
+import { JsonLd } from "@/components/ui/JsonLd";
+import { contactFormEn } from "@/content/contact-form";
+import { home, homeAccessImage, homeClientLogos } from "@/content/home";
+import { site } from "@/content/site";
+import { buildMetadata, organizationLd, websiteLd } from "@/lib/seo";
 
-// Placeholder — replaced by the Home page agent.
 export const metadata = buildMetadata({
   title: home.seo.title,
   description: home.seo.description,
@@ -13,10 +14,17 @@ export const metadata = buildMetadata({
   absoluteTitle: true,
 });
 
-export default function HomePage() {
+export default function Page() {
   return (
-    <Container className="py-section-y">
-      <Heading as="h1">{home.hero.title}</Heading>
-    </Container>
+    <>
+      <JsonLd data={[organizationLd(site), websiteLd({ locale: "en" })]} />
+      <HomePage
+        locale="en"
+        content={home}
+        accessImage={homeAccessImage}
+        logos={homeClientLogos}
+        form={contactFormEn}
+      />
+    </>
   );
 }
