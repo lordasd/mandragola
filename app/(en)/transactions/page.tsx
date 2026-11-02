@@ -1,5 +1,6 @@
 import { CtaBand } from "@/components/sections/CtaBand";
 import { StatsRow } from "@/components/sections/StatsRow";
+import { partyNames } from "@/components/transactions/TransactionCard";
 import { TransactionGrid } from "@/components/transactions/TransactionGrid";
 import { TransactionsHead } from "@/components/transactions/TransactionsHead";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
@@ -36,10 +37,8 @@ function splitLead(text: string): string[] {
 }
 
 const listLd = itemListLd(
-  transactions.items.map((t) => ({
-    name: `${t.parties.map((p) => p.name).join(" & ")} — ${t.type}`,
-    description: t.summary,
-  })),
+  // name = the card's h2 (party names), description = the visible summary.
+  transactions.items.map((t) => ({ name: partyNames(t), description: t.summary })),
   transactions.hero.title,
 );
 

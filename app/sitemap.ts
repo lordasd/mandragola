@@ -3,8 +3,11 @@ import { absoluteUrl } from "@/lib/seo";
 
 const LAST_MODIFIED = "2026-11-02";
 
-const pairs = { en: absoluteUrl("/"), he: absoluteUrl("/he") };
-const a11yPairs = { en: absoluteUrl("/accessibility"), he: absoluteUrl("/he/accessibility") };
+/** hreflang set for a translated pair; x-default points at the English URL (matches buildMetadata). */
+const langs = (en: string, he: string) => ({ en, he, "x-default": en });
+
+const pairs = langs(absoluteUrl("/"), absoluteUrl("/he"));
+const a11yPairs = langs(absoluteUrl("/accessibility"), absoluteUrl("/he/accessibility"));
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

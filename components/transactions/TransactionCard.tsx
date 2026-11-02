@@ -14,19 +14,25 @@ export interface TransactionCardLabels {
   tags: string;
 }
 
+/** Card heading + ItemList name: the party names, e.g. "DFSL & Tessera". */
+export function partyNames(item: Pick<Transaction, "parties">): string {
+  return item.parties.map((p) => p.name).join(" & ");
+}
+
 /*
+ * Presentational: the card's h2 already names the parties, so logos are alt="" inside an aria-hidden row.
  * Logo box: 40px tall, max 140px wide, object-contain. Wide wordmarks (T3 Defense 275×27, MIA 233×27) are capped by
  * width and render shorter; tall marks (ArrivAir II 163×97) are capped by height. max-w-35 = 140px.
  */
 function PartyMark({ party }: { party: Party }) {
   if (!party.logo) {
-    return <p className="min-w-0 font-heading text-h4 text-ink">{party.name}</p>;
+    return <span className="min-w-0 font-heading text-h4 text-ink">{party.name}</span>;
   }
   return (
     <span className="flex h-10 min-w-0 max-w-35 shrink items-center">
       <Image
         src={party.logo.src}
-        alt={party.logo.alt || party.name}
+        alt=""
         width={party.logo.width}
         height={party.logo.height}
         sizes="140px"
@@ -39,11 +45,19 @@ function PartyMark({ party }: { party: Party }) {
 
 /** One deal. An <article>, not a link (there are no detail pages). */
 export function TransactionCard({ item, labels }: { item: Transaction; labels: TransactionCardLabels }) {
+  const hasLogo = item.parties.some((p) => p.logo);
+  const title = partyNames(item);
   return (
     <Card
       as="article"
       className="flex h-full flex-col gap-5 motion-safe:transition-colors motion-safe:duration-150 hover:border-line-strong"
     >
+      {/* h2 = party names (page outline: h1 → card h2s → CTA h2). Visually the logo row carries it. */}
+      {hasLogo ? (
+        <h2 className="sr-only">{title}</h2>
+      ) : (
+        <h2 className="order-1 font-heading text-h4 text-ink">{title}</h2>
+      )}
       <div className="flex flex-wrap items-start justify-between gap-3">
         <ul aria-label={labels.tags} className="flex flex-wrap gap-2">
           {item.sectors.map((sector) => (
@@ -64,26 +78,20 @@ export function TransactionCard({ item, labels }: { item: Transaction; labels: T
         )}
       </div>
 
-      <div className="flex min-h-16 flex-wrap items-center gap-x-4 gap-y-2">
-        {item.parties.map((party, i) => (
-          <Fragment key={party.name}>
-            {i > 0 && (
-              <>
-                <span aria-hidden="true" className="font-heading text-h4 leading-none text-muted">
-                  &amp;
-                </span>
-                <span className="sr-only">{labels.and}</span>
-              </>
-            )}
-            <PartyMark party={party} />
-          </Fragment>
-        ))}
-      </div>
+      {hasLogo && (
+        <div aria-hidden="true" className="order-1 flex min-h-16 flex-wrap items-center gap-x-4 gap-y-2">
+          {item.parties.map((party, i) => (
+            <Fragment key={party.name}>
+              {i > 0 && <span className="font-heading text-h4 leading-none text-muted">&amp;</span>}
+              <PartyMark party={party} />
+            </Fragment>
+          ))}
+        </div>
+      )}
 
-      {/* h2: cards are the page's second outline level; styled as body-md per brief §4. */}
-      <h2 className="font-sans text-body-md font-medium text-ink">{item.summary}</h2>
+      <p className="order-2 font-sans text-body-md font-medium text-ink">{item.summary}</p>
 
-      <dl className="mt-auto border-t border-line pt-5">
+      <dl className="order-3 mt-auto border-t border-line pt-5">
         <dt className="text-eyebrow uppercase text-gold-text">{labels.role}</dt>
         <dd className="mt-2 text-body text-muted">{item.role}</dd>
       </dl>
