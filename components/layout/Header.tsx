@@ -35,7 +35,7 @@ export function Header({ site, locale, nav, cta }: HeaderProps) {
               alt={t.home}
               width={site.logo.width}
               height={site.logo.height}
-              priority
+              loading="eager"
               className="h-9 w-auto lg:h-11"
             />
           </Link>

@@ -112,8 +112,8 @@ const items: Transaction[] = [
     sectors: ["Defense", "Moto Testing"],
     type: "Structured Investments",
     parties: [P.motomea],
-    // The original card shows only "Pending" as its description.
-    summary: "Pending",
+    // The original card shows only "Pending"; summary is built from its own type + party fields.
+    summary: "Structured investment in Motomea",
     role: "Financing, M&A Consulting",
     status: "Pending",
   },

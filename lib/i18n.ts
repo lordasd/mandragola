@@ -23,6 +23,8 @@ export interface UiStrings {
   footerCompany: string;
   footerLegal: string;
   demoRebuild: string;
+  breadcrumb: string;
+  transaction: { role: string; and: string; status: string; tags: string };
 }
 
 export const ui: Record<Locale, UiStrings> = {
@@ -36,6 +38,8 @@ export const ui: Record<Locale, UiStrings> = {
     footerCompany: "Company",
     footerLegal: "Legal",
     demoRebuild: "Demo rebuild.",
+    breadcrumb: "Breadcrumb",
+    transaction: { role: "Mandragola’s role", and: "and", status: "Status:", tags: "Sector and deal type" },
     footerQuickLinks: "Quick links",
     footerFollow: "Follow",
     footerNav: "Footer",
@@ -57,6 +61,8 @@ export const ui: Record<Locale, UiStrings> = {
     footerCompany: "החברה",
     footerLegal: "מידע משפטי",
     demoRebuild: "בנייה מחדש לצורכי הדגמה.",
+    breadcrumb: "פירורי לחם",
+    transaction: { role: "תפקיד מנדרגולה", and: "ו־", status: "סטטוס:", tags: "תחום וסוג עסקה" },
     footerQuickLinks: "קישורים מהירים",
     footerFollow: "עקבו אחרינו",
     footerNav: "תחתית",

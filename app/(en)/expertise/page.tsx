@@ -1,14 +1,15 @@
-import { Breadcrumb } from "@/components/expertise/Breadcrumb";
 import { ExpertiseHead } from "@/components/expertise/ExpertiseHead";
 import { ExpertiseRows } from "@/components/expertise/ExpertiseRows";
 import { expertiseSlug } from "@/components/expertise/slug";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { contactFormEn } from "@/content/contact-form";
 import { expertise } from "@/content/expertise";
 import { home } from "@/content/home";
 import { markerLine, site } from "@/content/site";
+import { ui } from "@/lib/i18n";
 import { breadcrumbLd, buildMetadata, serviceLd } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -44,7 +45,7 @@ export default function ExpertisePage() {
       />
       <ExpertiseHead
         titleId="expertise-title"
-        breadcrumb={<Breadcrumb label="Breadcrumb" items={[crumbs[0], { label: crumbs[1].label }]} />}
+        breadcrumb={<Breadcrumb label={ui.en.breadcrumb} items={[crumbs[0], { label: crumbs[1].label }]} />}
         eyebrow={pageLabel}
         title={expertise.hero.title}
         body={expertise.hero.body}
