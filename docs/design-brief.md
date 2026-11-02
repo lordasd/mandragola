@@ -124,7 +124,7 @@ Set `--banner-h` (CSS var, 40px; 56px under 400px) → `body { padding-top: var(
 
 **Header / nav** (Figma `1:304`): sticky `top: var(--banner-h)`; outer padding `12px gutter` (desktop `30px 40px`
 → use `16px` to save height); inner bar bg `--color-ink`, radius `--radius-nav`, padding `12px 16px` → `20px 40px` ≥1024,
-`--header-h` 64 mobile / 84 desktop. Left: white Mandragola logo (`Mandragola-Logo-Investments-Limited-White.svg`,
+`--header-h` 64 mobile / 84 desktop. Bar has a 1px `--color-line-on-ink` (#FFFFFF26) border + soft ink shadow so it stays distinct over ink section cards (decorative edge, not a control boundary). Left: white Mandragola logo (`Mandragola-Logo-Investments-Limited-White.svg`,
 height 36 → 44, `alt="Mandragola Investments Limited – home"`). Center (≥1024): links Home · Expertise ·
 Transactions · Contact (anchor `#contact`), sans 16px white, gap 32, current page `aria-current="page"` + 2px gold
 underline offset 6px. Right: language switch "עברית"/"English" (`lang` attr on link, `hreflang`) + outline button
