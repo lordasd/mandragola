@@ -1,26 +1,199 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Design tokens — source of truth: docs/design-brief.md (contrast matrix there).
+ * Components use token utilities only (bg-ink, text-gold-text, text-h2, rounded-section,
+ * max-w-container, px-gutter ...), never raw hex/px.
+ * Forbidden: gold (#E2B471) as text/icon on light (1.74:1); line (#D9D3C7) as a control boundary.
+ */
+@theme {
+  --color-ink: #0b1b2e;
+  --color-ink-soft: #13294b;
+  --color-surface: #f7f4ee;
+  --color-surface-raised: #ffffff;
+  --color-surface-sunken: #efe8dc;
+  --color-text: #1b2430;
+  --color-muted: #4a5565; /* 6.88:1 on surface */
+  --color-on-ink: #ffffff; /* 17.35:1 on ink */
+  --color-on-ink-muted: #c9d2de; /* 11.37:1 on ink */
+  --color-gold: #e2b471; /* on ink only (9.09:1) or as bg behind ink text */
+  --color-gold-hover: #eac58e;
+  --color-gold-text: #7a5e2e; /* gold-family text on light (5.52:1 on surface) */
+  --color-line: #d9d3c7; /* decorative hairlines only */
+  --color-line-on-ink: #ffffff26;
+  --color-line-strong: #8a8173; /* input/outline/chip borders (>=3.5:1) */
+  --color-focus: #1f5fbf; /* 5.55:1 on surface */
+  --color-focus-on-ink: #e2b471;
+  --color-danger: #a3242a;
+
+  /* Fluid type scale 375 -> 1440 (rem + vw keeps zoom working) */
+  --text-h1: clamp(2.5rem, 1.7077rem + 3.3803vw, 4.75rem); /* 40 -> 76 */
+  --text-h1--line-height: 1.2;
+  --text-h1--letter-spacing: -0.01em;
+  --text-h2: clamp(2.125rem, 1.4648rem + 2.8169vw, 4rem); /* 34 -> 64 */
+  --text-h2--line-height: 1.19;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h3: clamp(1.75rem, 1.3099rem + 1.8779vw, 3rem); /* 28 -> 48 */
+  --text-h3--line-height: 1.19;
+  --text-h3--letter-spacing: -0.01em;
+  --text-h4: clamp(1.375rem, 1.243rem + 0.5634vw, 1.75rem); /* 22 -> 28 */
+  --text-h4--line-height: 1.39;
+  --text-h4--letter-spacing: -0.01em;
+  --text-body-xl: clamp(1.125rem, 0.993rem + 0.5634vw, 1.5rem); /* lead 18 -> 24 */
+  --text-body-xl--line-height: 1.5;
+  --text-body-xl--letter-spacing: 0.005em;
+  --text-body-lg: clamp(1.0625rem, 0.9525rem + 0.4695vw, 1.375rem); /* 17 -> 22 */
+  --text-body-lg--line-height: 1.5;
+  --text-body-lg--letter-spacing: 0.005em;
+  --text-body-md: clamp(1rem, 0.912rem + 0.3756vw, 1.25rem); /* 16 -> 20 */
+  --text-body-md--line-height: 1.4;
+  --text-body-md--letter-spacing: 0.005em;
+  --text-body: 1rem;
+  --text-body--line-height: 1.56;
+  --text-body--letter-spacing: 0.005em;
+  --text-eyebrow: 0.875rem; /* 14, 700, uppercase */
+  --text-eyebrow--line-height: 1.15;
+  --text-eyebrow--letter-spacing: 0.08em;
+  --text-eyebrow--font-weight: 700;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.45;
+  --text-small--letter-spacing: 0.005em;
+
+  /* Layout */
+  --container-container: 85rem; /* 1360 content -> max-w-container */
+  --container-prose: 68ch;
+  --container-lead: 60ch;
+  --spacing-gutter: clamp(1rem, 0.4718rem + 2.2535vw, 2.5rem); /* 16 -> 40 */
+  --spacing-section-gap: clamp(1.5rem, 0.9278rem + 2.4413vw, 3.125rem); /* 24 -> 50 */
+  --spacing-section-x: clamp(1.25rem, -0.0704rem + 5.6338vw, 5rem); /* 20 -> 80 */
+  --spacing-section-y: clamp(2.5rem, 1.3996rem + 4.6948vw, 5.625rem); /* 40 -> 90 */
+  --spacing-stack-lg: clamp(2rem, 1.3838rem + 2.6291vw, 3.75rem); /* 32 -> 60 */
+
+  /* Radii */
+  --radius-section: clamp(1.5rem, 0.9278rem + 2.4413vw, 3.125rem); /* 24 -> 50 */
+  --radius-card: clamp(1.25rem, 1.0299rem + 0.939vw, 1.875rem); /* 20 -> 30 */
+  --radius-nav: 0.75rem; /* 12; 15 at >=768 via .rounded-nav override below */
+  --radius-control: 0.625rem; /* 10 */
+  --radius-pill: 999px;
 }
 
+/* next/font sets --font-display / --font-text on <html> per locale (EN: EB Garamond + Spline Sans, HE: Frank Ruhl Libre + Assistant) */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-display), Georgia, serif;
+  --font-heading: var(--font-display), Georgia, serif;
+  --font-sans: var(--font-text), system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
+:root {
+  --banner-h: 2.5rem; /* 40 */
+  --header-h: 5rem; /* 64 bar + 16 outer padding */
+  --focus-ring: var(--color-focus);
+}
+
+@media (max-width: 24.99rem) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --banner-h: 3.5rem; /* banner wraps to 2 lines under 400px */
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (min-width: 48rem) {
+  :root {
+    --radius-nav: 0.9375rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --header-h: 6.75rem; /* 84 bar + 24 padding */
+  }
+}
+
+@layer base {
+  html {
+    /* Focus/anchors never hide under fixed banner + sticky header (WCAG 2.4.11) */
+    scroll-padding-top: calc(var(--banner-h) + var(--header-h) + 1rem);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    padding-top: var(--banner-h);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    letter-spacing: var(--text-body--letter-spacing);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 500;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    text-underline-offset: 0.2em;
+  }
+
+  ::selection {
+    background-color: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  /* Visible focus (2.4.7): >=3:1 on both tones */
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  /* Inside ink regions the ring switches to gold */
+  .on-ink {
+    --focus-ring: var(--color-focus-on-ink);
+  }
+
+  /* Hebrew: no tracking, no caps, roomier line-height */
+  :lang(he) * {
+    letter-spacing: 0 !important;
+  }
+  :lang(he) .uppercase {
+    text-transform: none;
+  }
+  :lang(he) body {
+    line-height: 1.65;
+  }
+  :lang(he) :is(h1, h2, h3, h4) {
+    line-height: 1.25;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (forced-colors: active) {
+  :focus-visible {
+    outline-color: Highlight;
+  }
 }
