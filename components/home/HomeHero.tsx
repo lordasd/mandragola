@@ -1,19 +1,23 @@
-import type { HomeContent } from "@/content/types";
+import type { HomeContent, Locale } from "@/content/types";
 import { ButtonLink } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
+import { ui } from "@/lib/i18n";
+import { HeroVideo } from "./HeroVideo";
 
 /**
- * Ink hero card with the page h1. Background is a pure CSS ink gradient: no image request, so the h1
- * text is the LCP element and paints with the first frame. (The original used a background video over a
- * green gradient image.) The overlay keeps the same tonal fade toward the end side on lg.
+ * Ink hero card with the page h1. Base background is a pure CSS ink gradient: no image request, so the
+ * h1 text is the LCP element and paints with the first frame. The original's background video is added
+ * by HeroVideo (desktop only, mounted after window load + idle, never under reduced motion), so it can't
+ * become the LCP. The overlay keeps text contrast over the video and fades toward the end side on lg.
  */
-export function HomeHero({ hero }: { hero: HomeContent["hero"] }) {
+export function HomeHero({ hero, locale }: { hero: HomeContent["hero"]; locale: Locale }) {
   const id = "hero-title";
   return (
     <Section
       tone="ink"
+      reveal={false}
       aria-labelledby={id}
       // Brief hero min-height clamp(520px, 70vh, 720px); no spacing token covers a vh range.
       innerClassName="relative isolate flex min-h-[clamp(32.5rem,70vh,45rem)] items-center overflow-hidden bg-linear-to-br from-ink to-ink-soft rtl:bg-linear-to-bl"
@@ -39,6 +43,7 @@ export function HomeHero({ hero }: { hero: HomeContent["hero"] }) {
           )}
         </div>
       </div>
+      {hero.video && <HeroVideo video={hero.video} labels={ui[locale].heroVideo} />}
     </Section>
   );
 }

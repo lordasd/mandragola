@@ -19,7 +19,7 @@ interface HomePageProps {
 export function HomePage({ locale, content, accessImage, logos, form }: HomePageProps) {
   return (
     <>
-      <HomeHero hero={content.hero} />
+      <HomeHero hero={content.hero} locale={locale} />
       <MissionSection mission={content.mission} stats={content.stats} />
       {/* Original statement button is "Our Mission" — same link as the hero CTA. */}
       <StatementSection philosophy={content.philosophy} cta={content.hero.cta} />

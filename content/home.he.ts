@@ -16,6 +16,8 @@ export const homeHe: HomeContent = {
     subtitle: "מחברים בין הון, קשרים עסקיים והזדמנויות בתחומי התעופה, החלל והביטחון (A&D) והטכנולוגיה",
     cta: { label: "החזון שלנו", href: `${ORIGIN}/our-mission/` },
     secondaryCta: { label: "לצפייה בעסקאות", href: "/transactions" },
+    // Original home hero background (re-encoded 1280px, muted; see public/video).
+    video: { webm: "/video/hero.webm", mp4: "/video/hero.mp4" },
   },
   mission: {
     eyebrow: "החזון שלנו",

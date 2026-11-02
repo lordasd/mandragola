@@ -59,7 +59,15 @@ export interface SiteContent {
 
 export interface HomeContent {
   seo: PageSeo;
-  hero: { eyebrow?: string; title: string; subtitle: string; cta: Link; secondaryCta?: Link };
+  hero: {
+    eyebrow?: string;
+    title: string;
+    subtitle: string;
+    cta: Link;
+    secondaryCta?: Link;
+    /** Decorative background loop (paths under /public). Desktop only, mounted after load by HeroVideo. */
+    video?: { webm: string; mp4: string };
+  };
   mission: { eyebrow: string; title: string; body: string; image?: ImageAsset };
   stats: Stat[];
   philosophy: { title: string; body: string };

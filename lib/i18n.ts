@@ -24,6 +24,8 @@ export interface UiStrings {
   demoRebuild: string;
   breadcrumb: string;
   transaction: { role: string; status: string; tags: string };
+  /** Accessible names of the home hero video's pause/play toggle (WCAG 2.2.2). */
+  heroVideo: { pause: string; play: string };
 }
 
 export const ui: Record<Locale, UiStrings> = {
@@ -39,6 +41,7 @@ export const ui: Record<Locale, UiStrings> = {
     demoRebuild: "Demo rebuild.",
     breadcrumb: "Breadcrumb",
     transaction: { role: "Mandragola’s role", status: "Status:", tags: "Sector and deal type" },
+    heroVideo: { pause: "Pause background video", play: "Play background video" },
     footerFollow: "Follow",
     footerNav: "Footer",
     accessibility: "Accessibility statement",
@@ -60,6 +63,7 @@ export const ui: Record<Locale, UiStrings> = {
     demoRebuild: "בנייה מחדש לצורכי הדגמה.",
     breadcrumb: "פירורי לחם",
     transaction: { role: "תפקיד מנדרגולה", status: "סטטוס:", tags: "תחום וסוג עסקה" },
+    heroVideo: { pause: "השהיית סרטון הרקע", play: "הפעלת סרטון הרקע" },
     footerFollow: "עקבו אחרינו",
     footerNav: "תחתית",
     accessibility: "הצהרת נגישות",

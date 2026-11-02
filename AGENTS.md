@@ -32,7 +32,7 @@ Demo rebuild of mandragolaltd.com (WordPress) for a recruitment home assignment:
 ## Non-negotiables
 - Demo banner on every page; `noindex` meta + `X-Robots-Tag` everywhere; contact form never sends or stores; public content only.
 - WCAG 2.2 AA (IS 5568). Logical CSS properties only (RTL).
-- Near-zero client JS: Server Components by default; client only for ContactForm, MobileNav, NavLink.
+- Near-zero client JS: Server Components by default; client only for ContactForm, MobileNav, NavLink, HeroVideo.
 
 ## Working in parallel (multi-agent)
 - Each agent edits only the paths it was assigned. Shared files (`components/ui`, `components/layout`, `lib`, `content/types.ts`, `globals.css`) — propose changes in your final report instead of editing, unless assigned.
@@ -46,3 +46,4 @@ Demo rebuild of mandragolaltd.com (WordPress) for a recruitment home assignment:
 - Vercel framework preset is pinned in `vercel.json` — don't delete it.
 - Git Bash rewrites `/route` args into Windows paths: pass routes to scripts without the leading slash.
 - `robots.txt` must allow crawling; `noindex` is enforced by meta + `X-Robots-Tag`.
+- Hero video (`HeroVideo`) mounts only after `window` load + idle, at ≥48rem, without reduced motion/Save-Data: keeps the h1 as LCP and mobile at zero video bytes. Keep the pause button (2.2.2) and the overlay stops in `HomeHero` (text contrast was sampled over video frames).

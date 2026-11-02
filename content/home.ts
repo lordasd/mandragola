@@ -24,6 +24,8 @@ export const home: HomeContent = {
     // Original button pointed to /our-mission-about-new/ (404); fixed to the live page.
     cta: { label: "Our Mission", href: `${ORIGIN}/our-mission/` },
     secondaryCta: { label: "Discover Transactions", href: "/transactions" },
+    // Original home hero background (re-encoded 1280px, muted; see public/video).
+    video: { webm: "/video/hero.webm", mp4: "/video/hero.mp4" },
   },
   mission: {
     eyebrow: "Our Mission",

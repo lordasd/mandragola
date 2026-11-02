@@ -42,6 +42,23 @@ export function CloseIcon(props: IconProps) {
   );
 }
 
+export function PauseIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M9 5v14M15 5v14" />
+    </Svg>
+  );
+}
+
+/** Media "play" triangle: does not mirror in RTL (media controls keep their LTR glyphs). */
+export function PlayIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M8 5.5v13l10-6.5z" />
+    </Svg>
+  );
+}
+
 /** Points toward the reading direction (right in LTR, left in RTL). */
 export function ArrowIcon({ className = "", ...props }: IconProps) {
   return (
