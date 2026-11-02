@@ -1,23 +1,9 @@
 import type { HTMLAttributes } from "react";
 import { cn } from "@/lib/cn";
 
-type CardProps = HTMLAttributes<HTMLElement> & {
-  as?: "div" | "article" | "li";
-  tone?: "raised" | "sunken" | "ink";
-};
+type CardProps = HTMLAttributes<HTMLElement> & { as?: "div" | "article" };
 
-const toneClass = {
-  raised: "bg-surface-raised text-text border border-line",
-  sunken: "bg-surface-sunken text-text",
-  ink: "on-ink bg-ink-soft text-on-ink",
-} as const;
-
-/** Rounded content card (feature tiles, transaction cards, stat tiles). */
-export function Card({ as: Tag = "div", tone = "raised", className, ...props }: CardProps) {
-  return (
-    <Tag
-      className={cn("rounded-card p-6 md:p-8", toneClass[tone], className)}
-      {...props}
-    />
-  );
+/** Rounded raised content card (expertise tiles, transaction cards). */
+export function Card({ as: Tag = "div", className, ...props }: CardProps) {
+  return <Tag className={cn("rounded-card border border-line bg-surface-raised p-6 text-text md:p-8", className)} {...props} />;
 }

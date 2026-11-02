@@ -52,21 +52,25 @@ export const homeHe: HomeContent = {
     title: "ניסיון שמעבר להון",
     items: [
       {
+        id: "capital-markets",
         title: "שוקי הון",
         body: "ניסיון בשווקים פיננסיים גלובליים, בניהול השקעות ובהקצאת הון",
         icon: "capital",
       },
       {
+        id: "company-building",
         title: "בניית חברות",
         body: "ליווי חברות בשלבי צמיחה והתרחבות ובביצוע אסטרטגי",
         icon: "building",
       },
       {
+        id: "strategic-relationships",
         title: "קשרים אסטרטגיים",
         body: "חיבור בין חברות, משקיעים ומובילי תעשייה בשווקים בינלאומיים",
         icon: "relationships",
       },
       {
+        id: "opportunity-sourcing",
         title: "איתור הזדמנויות",
         body: "זיהוי הזדמנויות ומימושן במגוון תעשיות, טכנולוגיות ושווקים",
         icon: "sourcing",
@@ -90,7 +94,6 @@ export const homeAccessImageHe: ImageAsset = {
 /** Hebrew wording for the descriptive part of logo alts; company names stay in Latin script. */
 const logoAltHe: Record<string, string> = {
   "VersaMed, acquired by GE HealthCare": "VersaMed, נרכשה על ידי GE HealthCare",
-  "DentFreak (Samba) toothbrush": "מברשת השיניים DentFreak (Samba)",
   "Enigma, acquired by PTC Inc.": "Enigma, נרכשה על ידי PTC Inc.",
 };
 

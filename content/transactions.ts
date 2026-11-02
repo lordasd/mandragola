@@ -16,7 +16,7 @@ const P = {
   t3: { name: "T3 Defense", logo: logo("t3-defense.svg", "T3 Defense", 275, 27) },
   star26: { name: "Star26", logo: logo("star26.svg", "Star26", 158, 37) },
   arrivair: { name: "ArrivAir II", logo: logo("arrivair-ii.svg", "ArrivAir II", 163, 97) },
-  dentfreak: { name: "DentFreak", logo: logo("dentfreak.svg", "DentFreak (Samba) toothbrush", 158, 39) },
+  dentfreak: { name: "DentFreak", logo: logo("dentfreak.svg", "DentFreak", 158, 39) },
   omegamore: { name: "OmegaMore", logo: logo("omegamore.svg", "OmegaMore", 178, 31) },
   kochav: { name: "Kochav", logo: logo("kochav.svg", "Kochav", 153, 30) },
   continual: { name: "Continual", logo: logo("continual.svg", "Continual", 207, 37) },

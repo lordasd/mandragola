@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Link as NavItem, Locale, SiteContent } from "@/content/types";
+import type { Locale, SiteContent } from "@/content/types";
 import { buttonClass } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { localizeLinks, ui } from "@/lib/i18n";
@@ -10,23 +10,20 @@ import { NavLink } from "./NavLink";
 interface HeaderProps {
   site: SiteContent;
   locale: Locale;
-  /** Override nav items; defaults to site.nav (labels localized for he). */
-  nav?: NavItem[];
-  cta?: NavItem;
 }
 
 /**
  * Sticky below the fixed demo banner. Ink bar (white logo) inside the container.
  * Uses logical properties only, so it mirrors automatically under dir="rtl".
  */
-export function Header({ site, locale, nav, cta }: HeaderProps) {
+export function Header({ site, locale }: HeaderProps) {
   const t = ui[locale];
   const homeHref = locale === "he" ? "/he" : "/";
-  const items = nav ?? localizeLinks(site.nav, locale);
-  const action = cta ?? localizeLinks([site.primaryCta], locale)[0];
+  const items = localizeLinks(site.nav, locale);
+  const [action] = localizeLinks([site.primaryCta], locale);
 
   return (
-    <header className="on-ink sticky top-[var(--banner-h)] z-50 pt-2 pb-2 lg:pt-4">
+    <header className="on-ink sticky top-(--banner-h) z-50 pt-2 pb-2 lg:pt-4">
       <Container className="relative">
         <div className="flex min-h-16 items-center justify-between gap-6 rounded-nav bg-ink px-4 py-2.5 lg:min-h-21 lg:px-10">
           <Link href={homeHref} className="inline-flex min-h-11 shrink-0 items-center rounded-control">
@@ -46,7 +43,7 @@ export function Header({ site, locale, nav, cta }: HeaderProps) {
                 <li key={item.href}>
                   <NavLink
                     href={item.href}
-                    className="inline-flex min-h-11 items-center text-body text-on-ink decoration-gold decoration-2 underline-offset-[6px] hover:text-gold hover:underline aria-[current=page]:underline"
+                    className="inline-flex min-h-11 items-center text-body text-on-ink decoration-gold decoration-2 underline-offset-6 hover:text-gold hover:underline aria-[current=page]:underline"
                   >
                     {item.label}
                   </NavLink>
@@ -64,9 +61,10 @@ export function Header({ site, locale, nav, cta }: HeaderProps) {
             >
               {t.switchLanguage.label}
             </a>
-            <NavLink href={action.href} className={buttonClass("outline", "ink")}>
+            {/* Hash link to the contact section is never the current page, so a plain Link (no client NavLink). */}
+            <Link href={action.href} className={buttonClass("outline", "ink")}>
               {action.label}
-            </NavLink>
+            </Link>
           </div>
 
           <MobileNav

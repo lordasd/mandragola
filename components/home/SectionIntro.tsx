@@ -17,7 +17,6 @@ interface SectionIntroProps {
   marker?: boolean;
   /** EN display caps (neutralised for Hebrew by globals.css). */
   uppercase?: boolean;
-  className?: string;
 }
 
 /** Eyebrow -> heading -> optional marker line -> lead (brief §4 "SectionHeading"). */
@@ -32,11 +31,10 @@ export function SectionIntro({
   align = "start",
   marker = false,
   uppercase = false,
-  className,
 }: SectionIntroProps) {
   const center = align === "center";
   return (
-    <div className={cn(center && "mx-auto flex flex-col items-center text-center", className)}>
+    <div className={center ? "mx-auto flex flex-col items-center text-center" : undefined}>
       {eyebrow && <Eyebrow tone={tone}>{eyebrow}</Eyebrow>}
       <Heading
         as={as}

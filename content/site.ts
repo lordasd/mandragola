@@ -42,13 +42,11 @@ export const site: SiteContent = {
   demoBanner: "Demo for a recruitment assignment — not the official Mandragola website",
 };
 
-/** Dark "A Segal Company" lockup used in the original footer (for light backgrounds). */
-export const footerLogo: ImageAsset = {
-  src: "/images/brand/mandragola-logo-segal.svg",
-  alt: "Mandragola Ltd — A Segal Company",
-  width: 480,
-  height: 311,
-};
+/** Hebrew wording of the site strings shown in the /he chrome (layout metadata, footer, contact card). */
+export const siteHe = {
+  tagline: "השקעות ושותפויות גלובליות",
+  address: "הגביש 8, נתניה",
+} as const;
 
 /** Gold brush underline used under section headings on the original. Decorative. */
 export const markerLine: ImageAsset = {

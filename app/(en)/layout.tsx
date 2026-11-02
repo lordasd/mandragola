@@ -5,6 +5,7 @@ import { SiteShell } from "@/components/layout/SiteShell";
 import { site } from "@/content/site";
 import { enFontVars } from "@/lib/fonts";
 import { NO_INDEX, SITE_URL } from "@/lib/seo";
+import { THEME_COLOR } from "@/lib/theme";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b1b2e",
+  themeColor: THEME_COLOR,
 };
 
 export default function EnglishRootLayout({ children }: { children: ReactNode }) {

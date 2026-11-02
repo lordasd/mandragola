@@ -2,7 +2,7 @@ import type { ExpertiseContent } from "./types";
 
 export const expertise: ExpertiseContent = {
   seo: {
-    title: "Expertise — Mandragola Ltd",
+    title: "Investment Expertise & Services — Mandragola Ltd",
     description:
       "Capital markets, company building, strategic relationships, and opportunity sourcing: how Mandragola Ltd supports growth beyond capital in A&D and tech.",
     path: "/expertise",
@@ -13,6 +13,7 @@ export const expertise: ExpertiseContent = {
   },
   areas: [
     {
+      id: "capital-markets",
       title: "Capital Markets & Investment Expertise",
       body: "Deep experience across global financial markets, investment management, capital allocation, and transaction execution, helping identify opportunities and support long-term value creation.",
       icon: "capital",
@@ -24,6 +25,7 @@ export const expertise: ExpertiseContent = {
       },
     },
     {
+      id: "company-building",
       title: "Company Building & Growth",
       body: "Supporting businesses through growth, expansion, strategic planning, and execution, with experience helping companies navigate the critical stages between opportunity and scale.",
       icon: "building",
@@ -35,6 +37,7 @@ export const expertise: ExpertiseContent = {
       },
     },
     {
+      id: "strategic-relationships",
       title: "Strategic Relationships & Partnerships",
       body: "Connecting companies, investors, and industry leaders internationally, using trusted relationships to open doors and move opportunities forward.",
       icon: "relationships",
@@ -46,6 +49,7 @@ export const expertise: ExpertiseContent = {
       },
     },
     {
+      id: "opportunity-sourcing",
       title: "Opportunity Sourcing & Market Insight",
       body: "Recognizing opportunities across industries, technologies, and markets through broad relationships, informed judgment, and a long-term view of where value can be created.",
       icon: "sourcing",

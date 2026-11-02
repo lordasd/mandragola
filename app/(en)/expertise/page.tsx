@@ -1,6 +1,5 @@
 import { ExpertiseHead } from "@/components/expertise/ExpertiseHead";
 import { ExpertiseRows } from "@/components/expertise/ExpertiseRows";
-import { expertiseSlug } from "@/components/expertise/slug";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
@@ -8,8 +7,7 @@ import { JsonLd } from "@/components/ui/JsonLd";
 import { contactFormEn } from "@/content/contact-form";
 import { expertise } from "@/content/expertise";
 import { home } from "@/content/home";
-import { markerLine, site } from "@/content/site";
-import { ui } from "@/lib/i18n";
+import { linkLabel, ui } from "@/lib/i18n";
 import { breadcrumbLd, buildMetadata, serviceLd } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -20,8 +18,8 @@ export const metadata = buildMetadata({
 });
 
 const path = expertise.seo.path;
-const homeLabel = site.footerLinks.find((l) => l.href === "/")?.label ?? site.name;
-const pageLabel = site.nav.find((l) => l.href === path)?.label ?? expertise.hero.title;
+const homeLabel = linkLabel("/");
+const pageLabel = linkLabel(path);
 
 export default function ExpertisePage() {
   const crumbs = [
@@ -38,7 +36,7 @@ export default function ExpertisePage() {
             serviceLd({
               name: area.title,
               description: area.body,
-              path: `${path}#${expertiseSlug(area.title)}`,
+              path: `${path}#${area.id}`,
             }),
           ),
         ]}
@@ -49,7 +47,6 @@ export default function ExpertisePage() {
         eyebrow={pageLabel}
         title={expertise.hero.title}
         body={expertise.hero.body}
-        marker={markerLine}
       />
       <ExpertiseRows areas={expertise.areas} />
       <CtaBand title={expertise.cta.title} body={expertise.cta.body} link={expertise.cta.link} />

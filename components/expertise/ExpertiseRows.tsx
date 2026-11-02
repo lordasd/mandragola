@@ -4,16 +4,15 @@ import { Heading } from "@/components/ui/Heading";
 import { featureIcons } from "@/components/ui/icons";
 import type { ExpertiseContent } from "@/content/types";
 import { cn } from "@/lib/cn";
-import { expertiseSlug } from "./slug";
 
 type Area = ExpertiseContent["areas"][number];
 
 /** One alternating image/text row (brief §4). Image first on mobile; even rows put the image at the end ≥1024. */
 function ExpertiseRow({ area, reverse }: { area: Area; reverse: boolean }) {
-  const slug = expertiseSlug(area.title);
+  const titleId = `${area.id}-title`;
   const Icon = area.icon ? featureIcons[area.icon] : null;
   return (
-    <section id={slug} aria-labelledby={`${slug}-title`} className="grid items-center gap-8 lg:grid-cols-2 lg:gap-15">
+    <section id={area.id} aria-labelledby={titleId} className="grid items-center gap-8 lg:grid-cols-2 lg:gap-15">
       {area.image && (
         <div className={cn(reverse && "lg:order-last")}>
           <Image
@@ -30,7 +29,7 @@ function ExpertiseRow({ area, reverse }: { area: Area; reverse: boolean }) {
       )}
       <div className="max-w-prose">
         {Icon && <Icon size={40} className="text-gold-text" />}
-        <Heading as="h2" size="h3" id={`${slug}-title`} className={cn("text-ink", Icon && "mt-5")}>
+        <Heading as="h2" size="h3" id={titleId} className={cn("text-ink", Icon && "mt-5")}>
           {area.title}
         </Heading>
         <p className="mt-4 text-body-lg text-muted">{area.body}</p>
@@ -43,7 +42,7 @@ export function ExpertiseRows({ areas }: { areas: ExpertiseContent["areas"] }) {
   return (
     <Container className="flex flex-col gap-stack-lg pb-section-y">
       {areas.map((area, i) => (
-        <ExpertiseRow key={area.title} area={area} reverse={i % 2 === 1} />
+        <ExpertiseRow key={area.id} area={area} reverse={i % 2 === 1} />
       ))}
     </Container>
   );

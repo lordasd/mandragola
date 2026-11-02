@@ -61,21 +61,25 @@ export const home: HomeContent = {
     title: "Experience that extends beyond capital",
     items: [
       {
+        id: "capital-markets",
         title: "Capital Markets",
         body: "Experience across global financial markets, investment management, and capital allocation",
         icon: "capital",
       },
       {
+        id: "company-building",
         title: "Company Building",
         body: "Supporting businesses through growth, expansion, and strategic execution",
         icon: "building",
       },
       {
+        id: "strategic-relationships",
         title: "Strategic Relationships",
         body: "Connecting companies, investors, and industry leaders across international markets",
         icon: "relationships",
       },
       {
+        id: "opportunity-sourcing",
         title: "Opportunity Sourcing",
         body: "Recognizing and pursuing opportunities across industries, technologies, and markets",
         icon: "sourcing",
@@ -112,7 +116,7 @@ export const homeClientLogos: ImageAsset[] = [
   logo("bladeranger.svg", "BladeRanger", 242, 41),
   logo("motomea.svg", "Motomea", 242, 31),
   logo("sciii.svg", "SCiiI", 381, 162),
-  logo("dentfreak.svg", "DentFreak (Samba) toothbrush", 158, 39),
+  logo("dentfreak.svg", "DentFreak", 158, 39),
   logo("continual.svg", "Continual", 207, 37),
   logo("water-io.svg", "Water.io", 117, 23),
   logo("enigma.svg", "Enigma, acquired by PTC Inc.", 177, 34),

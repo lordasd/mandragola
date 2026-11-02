@@ -29,6 +29,8 @@ export interface Stat {
 }
 
 export interface Feature {
+  /** Anchor id of the matching row on /expertise ("capital-markets"); shared by the home teaser cards. */
+  id: string;
   title: string;
   body: string;
   /** lucide-style icon key chosen by UI, optional */
@@ -90,6 +92,15 @@ export interface TransactionsContent {
   hero: { title: string; body: string };
   items: Transaction[];
   cta: { title: string; body: string; link: Link };
+}
+
+export interface NotFoundContent {
+  eyebrow: string;
+  title: string;
+  body: string;
+  homeLink: Link;
+  /** Hebrew line + link shown alongside the English copy (unmatched URLs have no locale). */
+  he: { body: string; homeLink: Link };
 }
 
 export interface ContactFormCopy {

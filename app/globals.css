@@ -65,6 +65,7 @@
   --container-lead: 60ch;
   --spacing-gutter: clamp(1rem, 0.4718rem + 2.2535vw, 2.5rem); /* 16 -> 40 */
   --spacing-section-gap: clamp(1.5rem, 0.9278rem + 2.4413vw, 3.125rem); /* 24 -> 50 */
+  --spacing-section-gap-half: calc(var(--spacing-section-gap) / 2); /* vertical padding of each stacked section card */
   --spacing-section-x: clamp(1.25rem, -0.0704rem + 5.6338vw, 5rem); /* 20 -> 80 */
   --spacing-section-y: clamp(2.5rem, 1.3996rem + 4.6948vw, 5.625rem); /* 40 -> 90 */
   --spacing-stack-lg: clamp(2rem, 1.3838rem + 2.6291vw, 3.75rem); /* 32 -> 60 */
@@ -160,12 +161,9 @@
     --focus-ring: var(--color-focus-on-ink);
   }
 
-  /* Hebrew: no tracking, no caps, roomier line-height */
+  /* Hebrew: no tracking, roomier line-height (the no-caps rule sits below, outside this layer) */
   :lang(he) * {
     letter-spacing: 0 !important;
-  }
-  :lang(he) .uppercase {
-    text-transform: none;
   }
   :lang(he) body {
     line-height: 1.65;
@@ -173,6 +171,14 @@
   :lang(he) :is(h1, h2, h3, h4) {
     line-height: 1.25;
   }
+}
+
+/*
+ * Hebrew: no caps on eyebrows and display titles. Unlayered on purpose: Tailwind's .uppercase lives in
+ * @layer utilities, which beats @layer base regardless of specificity.
+ */
+:lang(he) .uppercase {
+  text-transform: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {

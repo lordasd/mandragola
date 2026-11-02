@@ -1,4 +1,5 @@
-import type { Locale } from "@/content/types";
+import { site, siteHe } from "@/content/site";
+import type { Locale, SiteContent } from "@/content/types";
 
 /** UI chrome strings (not page content). Page copy lives in content/*.ts. */
 export interface UiStrings {
@@ -8,11 +9,9 @@ export interface UiStrings {
   closeMenu: string;
   home: string;
   footerContact: string;
-  footerQuickLinks: string;
   footerFollow: string;
   footerNav: string;
   accessibility: string;
-  rights: string;
   emailLabel: string;
   switchLanguage: { label: string; href: string; hrefLang: Locale; lang: Locale };
   /** Banner text for locales whose site content is English-only. */
@@ -33,18 +32,16 @@ export const ui: Record<Locale, UiStrings> = {
     primaryNav: "Main",
     openMenu: "Open menu",
     closeMenu: "Close menu",
-    home: "Mandragola Investments Limited – home",
+    home: "Mandragola Ltd — home",
     footerContact: "Contact",
     footerCompany: "Company",
     footerLegal: "Legal",
     demoRebuild: "Demo rebuild.",
     breadcrumb: "Breadcrumb",
     transaction: { role: "Mandragola’s role", and: "and", status: "Status:", tags: "Sector and deal type" },
-    footerQuickLinks: "Quick links",
     footerFollow: "Follow",
     footerNav: "Footer",
     accessibility: "Accessibility statement",
-    rights: "All rights reserved.",
     emailLabel: "Email",
     switchLanguage: { label: "עברית", href: "/he", hrefLang: "he", lang: "he" },
     demoBanner: "Demo for a recruitment assignment — not the official Mandragola website",
@@ -56,18 +53,16 @@ export const ui: Record<Locale, UiStrings> = {
     primaryNav: "ראשי",
     openMenu: "פתיחת תפריט",
     closeMenu: "סגירת תפריט",
-    home: "Mandragola – דף הבית",
+    home: "מנדרגולה בע״מ — דף הבית",
     footerContact: "יצירת קשר",
     footerCompany: "החברה",
     footerLegal: "מידע משפטי",
     demoRebuild: "בנייה מחדש לצורכי הדגמה.",
     breadcrumb: "פירורי לחם",
     transaction: { role: "תפקיד מנדרגולה", and: "ו־", status: "סטטוס:", tags: "תחום וסוג עסקה" },
-    footerQuickLinks: "קישורים מהירים",
     footerFollow: "עקבו אחרינו",
     footerNav: "תחתית",
     accessibility: "הצהרת נגישות",
-    rights: "כל הזכויות שמורות.",
     emailLabel: "דוא״ל",
     switchLanguage: { label: "English", href: "/", hrefLang: "en", lang: "en" },
     demoBanner: "אתר הדגמה למטלת גיוס — אינו האתר הרשמי של מנדרגולה",
@@ -77,7 +72,7 @@ export const ui: Record<Locale, UiStrings> = {
 };
 
 /** Hebrew labels for site.nav / site.footerLinks, keyed by English label (content is English-only). */
-export const heLinkLabels: Record<string, string> = {
+const heLinkLabels: Record<string, string> = {
   Home: "דף הבית",
   "Our Mission": "החזון שלנו",
   Expertise: "תחומי מומחיות",
@@ -95,6 +90,18 @@ export function localizeLinks<T extends { label: string; href: string }>(links: 
     label: heLinkLabels[l.label] ?? l.label,
     href: l.href === "/" ? "/he" : l.href === "/#contact" ? "/he#contact" : l.href,
   }));
+}
+
+/** Label of an internal site link (site.footerLinks / site.nav) by href, e.g. for breadcrumbs. Falls back to the href. */
+export function linkLabel(href: string, locale: Locale = "en"): string {
+  const link = [...site.footerLinks, ...site.nav].find((l) => l.href === href);
+  if (!link) return href;
+  return locale === "he" ? (heLinkLabels[link.label] ?? link.label) : link.label;
+}
+
+/** Site strings that have a Hebrew version (site content is otherwise English-only). */
+export function siteText(content: SiteContent, locale: Locale): { tagline: string; address: string } {
+  return locale === "he" ? siteHe : { tagline: content.tagline, address: content.contact.address };
 }
 
 /** Fixed so prerendering stays deterministic (Cache Components forbids new Date() in the static shell). */

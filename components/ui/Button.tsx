@@ -51,22 +51,6 @@ function Content({ children, arrow }: { children?: ReactNode; arrow?: boolean })
   );
 }
 
-export function Button({
-  variant,
-  tone,
-  arrow,
-  className,
-  children,
-  type = "button",
-  ...props
-}: ComponentPropsWithoutRef<"button"> & StyleProps) {
-  return (
-    <button type={type} className={buttonClass(variant, tone, className)} {...props}>
-      <Content arrow={arrow}>{children}</Content>
-    </button>
-  );
-}
-
 type ButtonLinkProps = Omit<ComponentPropsWithoutRef<"a">, "href"> & StyleProps & { href: string };
 
 /** Internal hrefs use next/link; mailto:, tel:, http(s) and #hash use a plain <a>. */

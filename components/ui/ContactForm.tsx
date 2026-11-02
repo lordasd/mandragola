@@ -14,13 +14,10 @@ const field =
  */
 export function ContactForm({
   copy,
-  tone = "light",
   hint,
   className,
 }: {
   copy: ContactFormCopy;
-  /** Background the form sits on (labels inherit color; inputs stay white). */
-  tone?: "light" | "ink";
   /** Optional static note above the button, e.g. "This is a demo — messages are not sent or stored." */
   hint?: string;
   className?: string;
@@ -34,11 +31,10 @@ export function ContactForm({
   }
 
   const label = "block font-semibold";
-  const muted = tone === "ink" ? "text-on-ink-muted" : "text-muted";
 
   return (
     <form onSubmit={onSubmit} aria-describedby={`${id}-req`} className={cn("space-y-5", className)}>
-      <p id={`${id}-req`} className={muted}>
+      <p id={`${id}-req`} className="text-muted">
         {copy.requiredNote}
       </p>
       <div>
@@ -59,8 +55,8 @@ export function ContactForm({
         </label>
         <textarea id={`${id}-message`} name="message" rows={6} required className={field} />
       </div>
-      {hint && <p className={muted}>{hint}</p>}
-      <button type="submit" className={buttonClass(tone === "ink" ? "gold" : "primary", tone, "w-full")}>
+      {hint && <p className="text-muted">{hint}</p>}
+      <button type="submit" className={buttonClass("primary", "light", "w-full")}>
         {copy.submitLabel}
       </button>
       <p role="status" aria-live="polite" className="min-h-6 font-semibold">

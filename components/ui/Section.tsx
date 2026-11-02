@@ -34,7 +34,7 @@ export function Section({
 }: SectionProps) {
   if (variant === "card") {
     return (
-      <section className={cn("py-[calc(var(--spacing-section-gap)/2)]", className)} {...props}>
+      <section className={cn("py-section-gap-half", className)} {...props}>
         <Container>
           <div
             className={cn("rounded-section px-section-x py-section-y", toneClass[tone], innerClassName)}

@@ -4,18 +4,14 @@ import { ContactForm } from "@/components/ui/ContactForm";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
-import { MailIcon, PinIcon, socialIcons } from "@/components/ui/icons";
-import { cn } from "@/lib/cn";
-import { ui } from "@/lib/i18n";
-
-/** Brand names, identical in every locale. */
-const networkName = { linkedin: "LinkedIn", facebook: "Facebook", x: "X" } as const;
+import { SocialLinks } from "@/components/ui/SocialLinks";
+import { MailIcon, PinIcon } from "@/components/ui/icons";
+import { siteText, ui } from "@/lib/i18n";
 
 interface ContactSectionProps {
   locale: Locale;
   copy: HomeContent["contact"];
   form: ContactFormCopy;
-  className?: string;
 }
 
 const groupTitle = "font-sans text-eyebrow uppercase text-gold";
@@ -24,12 +20,14 @@ const groupTitle = "font-sans text-eyebrow uppercase text-gold";
  * `id="contact"` target of the header CTA. Info column (ink card, from `site`) comes first in the DOM
  * (short; stacks above the form on mobile), form column at end on lg. Brief §4 "Contact section".
  */
-export function ContactSection({ locale, copy, form, className }: ContactSectionProps) {
+export function ContactSection({ locale, copy, form }: ContactSectionProps) {
   const t = ui[locale];
+  const { address } = siteText(site, locale);
   const headingId = "contact-title";
+  const socialId = `${headingId}-social`;
 
   return (
-    <Section id="contact" tone="raised" aria-labelledby={headingId} className={className}>
+    <Section id="contact" tone="raised" aria-labelledby={headingId}>
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
         <div className="on-ink rounded-card bg-ink px-6 py-8 text-on-ink md:px-10 md:py-12 lg:col-span-5 lg:px-12 lg:py-20">
           <address className="space-y-8 not-italic">
@@ -37,8 +35,8 @@ export function ContactSection({ locale, copy, form, className }: ContactSection
               <p className={groupTitle}>{t.footerContact}</p>
               <p className="mt-3 flex items-start gap-3 text-body-md">
                 <PinIcon size={22} className="mt-0.5 shrink-0 text-gold" />
-                {/* site address/email are Latin: isolate them so RTL bidi keeps "8 HaGavish…" in order */}
-                <bdi lang={locale === "he" ? "en" : undefined}>{site.contact.address}</bdi>
+                {/* Address and email isolated so bidi keeps numbers and the Latin email in order in RTL */}
+                <bdi>{address}</bdi>
               </p>
               <a
                 href={`mailto:${site.contact.email}`}
@@ -53,33 +51,16 @@ export function ContactSection({ locale, copy, form, className }: ContactSection
             </div>
             {site.social.length > 0 && (
               <div>
-                <p className={groupTitle} id={`${headingId}-social`}>
+                <p className={groupTitle} id={socialId}>
                   {t.footerFollow}
                 </p>
-                <ul className="mt-3 flex flex-wrap gap-3" aria-labelledby={`${headingId}-social`}>
-                  {site.social.map((s) => {
-                    const Icon = socialIcons[s.network];
-                    return (
-                      <li key={s.href}>
-                        <a
-                          href={s.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={networkName[s.network]}
-                          className="inline-flex size-11 items-center justify-center rounded-full border border-on-ink/60 text-on-ink motion-safe:transition-colors motion-safe:duration-150 hover:border-gold hover:text-gold"
-                        >
-                          <Icon size={20} />
-                        </a>
-                      </li>
-                    );
-                  })}
-                </ul>
+                <SocialLinks links={site.social} labelledBy={socialId} className="mt-3 gap-3" />
               </div>
             )}
           </address>
         </div>
 
-        <div className={cn("lg:col-span-7")}>
+        <div className="lg:col-span-7">
           <Eyebrow>{copy.eyebrow}</Eyebrow>
           <Heading as="h2" size="h3" id={headingId} className="mt-4.5 text-ink">
             {copy.title}

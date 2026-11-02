@@ -1,17 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Link as NavItem, Locale, SiteContent } from "@/content/types";
+import type { Locale, SiteContent } from "@/content/types";
 import { Container } from "@/components/ui/Container";
-import { MailIcon, PinIcon, socialIcons } from "@/components/ui/icons";
-import { COPYRIGHT_YEAR, localizeLinks, ui } from "@/lib/i18n";
-
-const networkName = { linkedin: "LinkedIn", facebook: "Facebook", x: "X" } as const;
+import { SocialLinks } from "@/components/ui/SocialLinks";
+import { MailIcon, PinIcon } from "@/components/ui/icons";
+import { COPYRIGHT_YEAR, localizeLinks, siteText, ui } from "@/lib/i18n";
 
 interface FooterProps {
   site: SiteContent;
   locale: Locale;
-  /** Override "Company" links; defaults to site.footerLinks (labels localized for he). */
-  links?: NavItem[];
 }
 
 const linkClass =
@@ -19,12 +16,11 @@ const linkClass =
 const headingClass = "font-sans text-body font-semibold text-on-ink";
 
 /** Ink block with rounded top at container width (Figma 1:199). */
-export function Footer({ site, locale, links }: FooterProps) {
+export function Footer({ site, locale }: FooterProps) {
   const t = ui[locale];
+  const { tagline, address } = siteText(site, locale);
   const a11yHref = locale === "he" ? "/he/accessibility" : "/accessibility";
-  const company = links ?? localizeLinks(site.footerLinks, locale);
-  /** site.* strings are English-only; mark them on /he (WCAG 3.1.2). */
-  const enOnly = locale === "he" ? "en" : undefined;
+  const company = localizeLinks(site.footerLinks, locale);
 
   return (
     <Container as="footer" className="mt-section-gap">
@@ -32,9 +28,7 @@ export function Footer({ site, locale, links }: FooterProps) {
         <div className="grid gap-10 md:grid-cols-3 lg:grid-cols-12">
           <div className="md:col-span-3 lg:col-span-3">
             <Image src={site.logo.src} alt={site.name} width={site.logo.width} height={site.logo.height} className="h-12 w-auto" />
-            <p lang={enOnly} className="mt-4 max-w-xs text-on-ink-muted">
-              {site.tagline}
-            </p>
+            <p className="mt-4 max-w-xs text-on-ink-muted">{tagline}</p>
           </div>
 
           <nav aria-label={t.footerNav} className="lg:col-span-3">
@@ -55,8 +49,8 @@ export function Footer({ site, locale, links }: FooterProps) {
             <address className="mt-3 not-italic">
               <p className="flex min-h-11 items-center gap-2 text-on-ink-muted">
                 <PinIcon size={20} className="shrink-0 text-gold" />
-                {/* Latin address isolated so RTL bidi keeps "8 HaGavish…" in order */}
-                <bdi lang={enOnly}>{site.contact.address}</bdi>
+                {/* Isolated so bidi keeps the street number in place in either direction */}
+                <bdi>{address}</bdi>
               </p>
               <a href={`mailto:${site.contact.email}`} className={linkClass}>
                 <MailIcon size={20} className="shrink-0 text-gold" />
@@ -66,26 +60,7 @@ export function Footer({ site, locale, links }: FooterProps) {
                 </span>
               </a>
             </address>
-            {site.social.length > 0 && (
-              <ul className="mt-3 flex gap-2" aria-label={t.footerFollow}>
-                {site.social.map((s) => {
-                  const Icon = socialIcons[s.network];
-                  return (
-                    <li key={s.href}>
-                      <a
-                        href={s.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex size-11 items-center justify-center rounded-full border border-on-ink/60 text-on-ink hover:border-gold hover:text-gold"
-                      >
-                        <Icon size={20} />
-                        <span className="sr-only">{networkName[s.network]}</span>
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
+            <SocialLinks links={site.social} label={t.footerFollow} className="mt-3 gap-2" />
           </div>
 
           <div className="lg:col-span-2">

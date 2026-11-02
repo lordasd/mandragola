@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import type { Link as NavItem } from "@/content/types";
 import { CloseIcon, MenuIcon } from "@/components/ui/icons";
@@ -15,7 +16,7 @@ interface MobileNavProps {
 }
 
 const rowClass =
-  "flex min-h-14 items-center border-b border-line-on-ink font-heading text-xl text-on-ink hover:text-gold aria-[current=page]:text-gold";
+  "flex min-h-14 items-center border-b border-line-on-ink font-heading text-body-xl text-on-ink hover:text-gold aria-[current=page]:text-gold";
 
 /** Disclosure menu below lg. Esc closes and returns focus to the toggle; link click closes. No focus trap. */
 export function MobileNav({ items, cta, navLabel, openLabel, closeLabel, language }: MobileNavProps) {
@@ -65,9 +66,9 @@ export function MobileNav({ items, cta, navLabel, openLabel, closeLabel, languag
               </li>
             ))}
             <li>
-              <NavLink href={cta.href} onClick={close} className={rowClass}>
+              <Link href={cta.href} onClick={close} className={rowClass}>
                 {cta.label}
-              </NavLink>
+              </Link>
             </li>
             <li>
               <a href={language.href} hrefLang={language.hrefLang} lang={language.lang} className={`${rowClass} border-b-0`}>
