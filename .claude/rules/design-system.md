@@ -16,7 +16,7 @@ Source of truth: `docs/design-brief.md` (tokens, contrast matrix, component spec
 - New color pair? Compute contrast first and add it to the brief's matrix. Text ≥4.5:1, large text/UI ≥3:1.
 
 ## Type
-- Headings: `font-serif` (EB Garamond / Frank Ruhl Libre on /he). Body: `font-sans` (Spline Sans / Assistant).
+- Headings: `font-heading` (EB Garamond; Heebo on /he). Body: `font-sans` (Spline Sans; Heebo on /he).
 - Sizes only via scale tokens: `text-h1…text-h4`, `text-body-xl|lg|md`, `text-body`, `text-eyebrow`, `text-small`.
 - Visual size is decoupled from heading level: use `<Heading as="h2" size="h3">`. Exactly one `h1` per page, no skipped levels.
 - Uppercase/letter-spacing only for EN hero/page titles and eyebrows. Hebrew: no uppercase, tracking 0.

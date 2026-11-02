@@ -69,7 +69,7 @@ Focus ring: `outline: 2px solid var(--color-focus); outline-offset: 3px;` inside
 
 Fonts via `next/font/google`, `display: swap`, subsets latin (+ hebrew for /he):
 `--font-serif` EB Garamond 400/500 · `--font-sans` Spline Sans 400/600/700 ·
-`/he`: `--font-serif` Frank Ruhl Libre 400/500 · `--font-sans` Assistant 400/600/700 (swap the vars on the `he` layout).
+`/he`: Heebo (variable) for both `--font-display` and `--font-text` — changed from Frank Ruhl Libre + Assistant at the client's request.
 
 Fluid scale (375 → 1440, `rem + vw` so zoom still works):
 
