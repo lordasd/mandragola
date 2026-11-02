@@ -33,12 +33,12 @@ Source of truth: `docs/design-brief.md` (tokens, contrast matrix, component spec
 - Transaction cards are `<article>`, not links. Stats use `<dl>`. Status/sector chips always carry text (never color-only).
 
 ## Imagery
-- Only Mandragola's own images from `public/images/**`. No template illustrations, stock photos, video or fake stats.
+- Only Mandragola's own images from `public/images/**` (and its own hero video in `public/video/`). No template illustrations, stock photos or fake stats.
 - Always `next/image` with explicit `sizes`. `priority` only on the single LCP image (hero). Everything else lazy.
 - Meaningful images get short descriptive alt; logos get the company name; decorative images `alt=""`.
 
 ## Motion
-- 150ms color/border transitions only, inside `@media (prefers-reduced-motion: no-preference)`. No carousels, parallax, counters, autoplay.
+- 150ms color/border transitions only, inside `@media (prefers-reduced-motion: no-preference)`. No carousels, parallax, counters, or autoplay — except the home hero background video (`HeroVideo`, see accessibility rule).
 - One scroll reveal, CSS-only: the `.reveal` utility in `globals.css` (keyframes `reveal-in`: transform-only 12px rise — **no opacity**, a fade left near-fold text half-transparent and failed axe contrast; `animation-timeline: view()`, range `entry 0% entry 60%`). Gated by `prefers-reduced-motion: no-preference` **and** `@supports (animation-timeline: view())`; elsewhere content is static and fully visible. No JS, no IntersectionObserver.
 - `Section` adds `.reveal` to its inner element by default. Pass `reveal={false}` for anything in the first viewport at load: the home hero (LCP h1) and page heads (`TransactionsHead`). `ExpertiseHead` and `LegalPage` don't use `.reveal`.
 - Per-item reveal only on transaction cards and expertise rows (each has its own view timeline = natural stagger). Never nest `.reveal` inside a revealing `Section`, never on the h1/LCP, and re-run `npm run a11y` after changing distance/range.

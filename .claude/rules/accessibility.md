@@ -24,7 +24,7 @@ Do:
 Don't:
 - No accessibility overlay widgets (the original's OneTap overlay is what we're replacing with native markup).
 - No `tabindex` > 0, no `div`/`span` click handlers — use `<button>`/`<a>`.
-- No color-only meaning, no placeholder-as-label, no `title`-only names, no auto-playing media.
+- No color-only meaning, no placeholder-as-label, no `title`-only names, no auto-playing media — the one exception is the home hero background video: muted, decorative (`aria-hidden`), desktop only, never under reduced motion, with a visible pause/play button (WCAG 2.2.2).
 - Don't remove the demo banner or the accessibility statement link in the footer.
 
 Check before finishing: `npm run typecheck` + `npm run lint`; when you're allowed to build (see AGENTS.md "Working in parallel"), `npm run a11y` on your route plus a keyboard pass (Tab through the whole page, open/close menu with keyboard).

@@ -233,6 +233,14 @@
   }
 }
 
+/*
+ * Focus ring appears instantly: Tailwind's transition-colors also animates outline-color, which made the
+ * ring fade from white to gold on ink controls. Unlayered so it beats @layer utilities.
+ */
+:focus-visible {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+}
+
 @media (forced-colors: active) {
   :focus-visible {
     outline-color: Highlight;

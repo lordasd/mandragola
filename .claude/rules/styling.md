@@ -15,4 +15,4 @@ paths:
 - Interactive states: every interactive element has `hover:` and `focus-visible:` styles; never `outline-none` without a replacement ring.
 - Touch targets ≥44px tall for primary controls (≥24×24 absolute minimum, WCAG 2.5.8).
 - Transitions only inside `motion-safe:`.
-- Keep client JS near zero: components are Server Components unless they need state (`"use client"` only for ContactForm and the mobile menu toggle).
+- Keep client JS near zero: components are Server Components unless they need state (`"use client"` only for ContactForm, MobileNav, NavLink, LanguageLink and HeroVideo).
