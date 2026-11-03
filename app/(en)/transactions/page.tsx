@@ -1,4 +1,4 @@
-import { CtaBand } from "@/components/sections/CtaBand";
+import { ContactSection } from "@/components/sections/ContactSection";
 import { StatsRow } from "@/components/sections/StatsRow";
 import { partyNames } from "@/components/transactions/TransactionCard";
 import { TransactionGrid } from "@/components/transactions/TransactionGrid";
@@ -6,6 +6,7 @@ import { TransactionsHead } from "@/components/transactions/TransactionsHead";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Container } from "@/components/ui/Container";
 import { JsonLd } from "@/components/ui/JsonLd";
+import { contactFormEn } from "@/content/contact-form";
 import { home } from "@/content/home";
 import { transactions } from "@/content/transactions";
 import { linkLabel, ui } from "@/lib/i18n";
@@ -57,7 +58,7 @@ export default function TransactionsPage() {
         <StatsRow stats={home.stats} />
       </Container>
       <TransactionGrid items={transactions.items} labels={t.transaction} listLabel={transactions.hero.title} />
-      <CtaBand title={transactions.cta.title} body={transactions.cta.body} link={transactions.cta.link} />
+      <ContactSection locale="en" copy={home.contact} form={contactFormEn} />
     </>
   );
 }

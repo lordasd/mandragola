@@ -1,7 +1,6 @@
 import { ExpertiseHead } from "@/components/expertise/ExpertiseHead";
 import { ExpertiseRows } from "@/components/expertise/ExpertiseRows";
 import { ContactSection } from "@/components/sections/ContactSection";
-import { CtaBand } from "@/components/sections/CtaBand";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { contactFormEn } from "@/content/contact-form";
@@ -49,7 +48,6 @@ export default function ExpertisePage() {
         body={expertise.hero.body}
       />
       <ExpertiseRows areas={expertise.areas} />
-      <CtaBand title={expertise.cta.title} body={expertise.cta.body} link={expertise.cta.link} />
       <ContactSection locale="en" copy={home.contact} form={contactFormEn} />
     </>
   );

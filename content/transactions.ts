@@ -140,10 +140,4 @@ export const transactions: TransactionsContent = {
     body: "Some of our latest M&As, joint ventures, and financing deals. Every transaction we structure is a reflection of our core philosophy: balancing rigorous capital market discipline with the agility of high-tech entrepreneurship. We don’t merely close deals; we architect deep strategic partnerships and cross-border alliances that transform disruptive concepts in security, tech, and aerospace into institutional-grade global market leaders.",
   },
   items,
-  cta: {
-    // Heading present (hidden) in the original transactions page markup.
-    title: "Strategic Capital, Uncompromising Alliances, and High-Impact Scale for Essential Industries.",
-    body: "Connecting companies, investors, and industry leaders across international markets.",
-    link: { label: "Contact us", href: "/#contact" },
-  },
 };

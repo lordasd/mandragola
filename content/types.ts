@@ -81,7 +81,6 @@ export interface ExpertiseContent {
   seo: PageSeo;
   hero: { title: string; body: string; image?: ImageAsset };
   areas: (Feature & { image?: ImageAsset })[];
-  cta: { title: string; body: string; link: Link };
 }
 
 export interface Party {
@@ -103,7 +102,6 @@ export interface TransactionsContent {
   seo: PageSeo;
   hero: { title: string; body: string };
   items: Transaction[];
-  cta: { title: string; body: string; link: Link };
 }
 
 export interface NotFoundContent {
@@ -117,11 +115,22 @@ export interface NotFoundContent {
 
 export interface ContactFormCopy {
   nameLabel: string;
+  phoneLabel: string;
   emailLabel: string;
-  messageLabel: string;
+  sectorLabel: string;
+  companyLabel: string;
+  /** Screen-reader text after required labels (the visible "*" is aria-hidden), e.g. "(required)". */
+  requiredLabel: string;
+  /** Visible text after optional labels, e.g. "(optional)". */
+  optionalLabel: string;
   submitLabel: string;
-  requiredNote: string;
   demoNotice: string; // shown after "submit": nothing was sent
   /** Inline validation messages, shown as text under the field (WCAG 3.3.1/3.3.3). */
-  errors: { nameRequired: string; emailRequired: string; emailInvalid: string; messageRequired: string };
+  errors: {
+    nameRequired: string;
+    phoneRequired: string;
+    phoneInvalid: string;
+    emailRequired: string;
+    emailInvalid: string;
+  };
 }

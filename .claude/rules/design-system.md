@@ -24,7 +24,7 @@ Source of truth: `docs/design-brief.md` (tokens, contrast matrix, component spec
 ## Layout
 - Wrap page content in `Container` (max 1360, fluid gutter). Big blocks are `Section` cards (`tone="ink" | "raised" | "sunken"`), radius `--radius-section`, padding `--section-pad-*`, gap `--section-gap` between cards.
 - Pattern for every section intro: `Eyebrow` → `Heading` → optional marker line (decorative, `aria-hidden`) → lead.
-- Reuse existing components before creating new ones: `components/ui/*` (Container, Section, Eyebrow, Heading, ButtonLink/`buttonClass`, Card, Breadcrumb, MarkerLine, SocialLinks, JsonLd, ContactForm), `components/sections/*` (CtaBand, StatsRow, ContactSection) and `components/layout/*` (SiteShell, Header, Footer, NotFoundBody). Page-specific pieces go in `components/<page>/`.
+- Reuse existing components before creating new ones: `components/ui/*` (Container, Section, Eyebrow, Heading, ButtonLink/`buttonClass`, Card, Breadcrumb, MarkerLine, SocialLinks, JsonLd, ContactForm), `components/sections/*` (StatsRow, ContactSection) and `components/layout/*` (SiteShell, Header, Footer, NotFoundBody). Page-specific pieces go in `components/<page>/`.
 - Sections must take content via props (from `content/*.ts`) — no hard-coded copy in components, so `/he` can reuse them.
 
 ## Components (see brief §4 for exact specs)

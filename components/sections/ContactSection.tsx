@@ -3,6 +3,7 @@ import { site } from "@/content/site";
 import { ContactForm } from "@/components/ui/ContactForm";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
+import { Lines } from "@/components/ui/Lines";
 import { Section } from "@/components/ui/Section";
 import { SocialLinks } from "@/components/ui/SocialLinks";
 import { MailIcon, PinIcon } from "@/components/ui/icons";
@@ -17,8 +18,9 @@ interface ContactSectionProps {
 const groupTitle = "font-sans text-eyebrow uppercase text-gold";
 
 /**
- * `id="contact"` target of the header CTA. Info column (ink card, from `site`) comes first in the DOM
- * (short; stacks above the form on mobile), form column at end on lg. Brief §4 "Contact section".
+ * `id="contact"` target of the header CTA. Form column (with the section h2) comes first in the DOM, so on
+ * mobile the heading + form lead and the info card (ink, from `site`) follows; on lg the card is moved to the
+ * start column visually (lg:order-first). Brief §4 "Contact section".
  */
 export function ContactSection({ locale, copy, form }: ContactSectionProps) {
   const t = ui[locale];
@@ -29,7 +31,18 @@ export function ContactSection({ locale, copy, form }: ContactSectionProps) {
   return (
     <Section id="contact" tone="raised" aria-labelledby={headingId}>
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
-        <div className="on-ink rounded-card bg-ink px-6 py-8 text-on-ink md:px-10 md:py-12 lg:col-span-5 lg:px-12 lg:py-20">
+        <div className="lg:col-span-7">
+          <Eyebrow>{copy.eyebrow}</Eyebrow>
+          <Heading as="h2" size="h3" id={headingId} className="mt-4.5 text-ink">
+            {copy.title}
+          </Heading>
+          <p className="mt-5 max-w-lead text-body-lg text-muted">
+            <Lines text={copy.body} />
+          </p>
+          <ContactForm copy={form} className="mt-8" />
+        </div>
+
+        <div className="on-ink rounded-card bg-ink px-6 py-8 text-on-ink md:px-10 md:py-12 lg:order-first lg:col-span-5 lg:px-12 lg:py-20">
           <address className="space-y-8 not-italic">
             <div>
               <p className={groupTitle}>{t.footerContact}</p>
@@ -58,15 +71,6 @@ export function ContactSection({ locale, copy, form }: ContactSectionProps) {
               </div>
             )}
           </address>
-        </div>
-
-        <div className="lg:col-span-7">
-          <Eyebrow>{copy.eyebrow}</Eyebrow>
-          <Heading as="h2" size="h3" id={headingId} className="mt-4.5 text-ink">
-            {copy.title}
-          </Heading>
-          <p className="mt-5 max-w-lead text-body-lg text-muted">{copy.body}</p>
-          <ContactForm copy={form} hint={t.formHint} className="mt-8" />
         </div>
       </div>
     </Section>

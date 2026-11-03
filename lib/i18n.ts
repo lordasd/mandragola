@@ -18,7 +18,6 @@ export interface UiStrings {
   demoBanner: string;
   demoBannerLabel: string;
   /** Static hint for ContactForm's `hint` prop. */
-  formHint: string;
   footerCompany: string;
   footerLegal: string;
   demoRebuild: string;
@@ -49,7 +48,6 @@ export const ui: Record<Locale, UiStrings> = {
     switchLanguage: { label: "עברית", hrefLang: "he", lang: "he" },
     demoBanner: "Demo for a recruitment assignment — not the official Mandragola website",
     demoBannerLabel: "Demo notice",
-    formHint: "This is a demo — messages are not sent or stored.",
   },
   he: {
     skipToContent: "דילוג לתוכן הראשי",
@@ -71,7 +69,6 @@ export const ui: Record<Locale, UiStrings> = {
     switchLanguage: { label: "English", hrefLang: "en", lang: "en" },
     demoBanner: "אתר הדגמה למטלת גיוס — אינו האתר הרשמי של מנדרגולה",
     demoBannerLabel: "הודעת הדגמה",
-    formHint: "זהו אתר הדגמה — הודעות אינן נשלחות או נשמרות.",
   },
 };
 
