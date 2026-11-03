@@ -89,7 +89,7 @@
   /* Estimate of the banner's height, used only for scroll-padding / menu max-height (the banner itself
      sizes to its text). One line >=600px, two lines below. */
   --banner-h: 2.5rem; /* 40 */
-  --header-h: 5rem; /* 64 bar + 16 outer padding */
+  --header-h: 4.5rem; /* 72 full-width bar under the banner */
   --focus-ring: var(--color-focus);
 }
 
@@ -107,7 +107,7 @@
 
 @media (min-width: 64rem) {
   :root {
-    --header-h: 6.75rem; /* 84 bar + 24 padding */
+    --header-h: 6rem; /* 96 bar */
   }
 }
 

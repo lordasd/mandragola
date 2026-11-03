@@ -24,10 +24,11 @@ export function Header({ site, locale }: HeaderProps) {
   const [action] = localizeLinks([site.primaryCta], locale);
 
   return (
-    <header className="on-ink pt-2 pb-2 lg:pt-4">
+    // Full-width ink bar; content aligned to the page container. Hairline + shadow: the bar is ink like the
+    // section cards it scrolls over, so it needs an edge.
+    <header className="on-ink border-b border-line-on-ink bg-ink shadow-lg shadow-ink/25">
       <Container className="relative">
-        {/* Hairline + shadow: the bar is ink like the section cards it scrolls over, so it needs an edge. */}
-        <div className="flex min-h-16 items-center justify-between gap-6 rounded-nav border border-line-on-ink bg-ink px-4 py-2.5 shadow-lg shadow-ink/25 lg:min-h-21 lg:px-10">
+        <div className="flex min-h-18 items-center justify-between gap-6 py-2.5 lg:min-h-24">
           <Link href={homeHref} className="inline-flex min-h-11 shrink-0 items-center rounded-control">
             <Image
               src={site.logo.src}
@@ -35,7 +36,7 @@ export function Header({ site, locale }: HeaderProps) {
               width={site.logo.width}
               height={site.logo.height}
               loading="eager"
-              className="h-9 w-auto lg:h-11"
+              className="h-13 w-auto lg:h-18"
             />
           </Link>
 
