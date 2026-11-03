@@ -23,6 +23,8 @@ type SectionProps = Omit<ComponentPropsWithoutRef<"section">, "children"> & {
    * Pass false for anything in the first viewport at load: the hero (LCP h1) and page heads.
    */
   reveal?: boolean;
+  /** "card" only. "full": the card spans the viewport edge to edge (no side radius); children stay in a Container. */
+  width?: "container" | "full";
 };
 
 /**
@@ -35,9 +37,20 @@ export function Section({
   className,
   innerClassName,
   reveal = true,
+  width = "container",
   children,
   ...props
 }: SectionProps) {
+  if (variant === "card" && width === "full") {
+    return (
+      <section className={cn("py-section-gap-half", className)} {...props}>
+        <div className={cn("py-section-y", toneClass[tone], reveal && "reveal", innerClassName)}>
+          <Container>{children}</Container>
+        </div>
+      </section>
+    );
+  }
+
   if (variant === "card") {
     return (
       <section className={cn("py-section-gap-half", className)} {...props}>

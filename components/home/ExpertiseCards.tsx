@@ -14,18 +14,18 @@ export function ExpertiseCards({ teaser }: { teaser: HomeContent["expertiseTease
   const id = "expertise-title";
   return (
     <Section tone="ink" aria-labelledby={id}>
-      <SectionIntro id={id} title={teaser.title} size="h2" tone="ink" align="center" marker uppercase />
-      <ul className="mt-stack-lg grid gap-4 md:grid-cols-2 md:gap-7.5">
+      <SectionIntro id={id} title={teaser.title} size="h2" tone="ink" align="center" marker="last-line" uppercase />
+      <ul className="mt-stack-lg grid grid-cols-2 gap-3 md:gap-6 xl:grid-cols-4">
         {teaser.items.map((item) => {
           const Icon = item.icon ? featureIcons[item.icon] : null;
           return (
             <li key={item.id} className="flex">
               <Card
                 as="article"
-                className="relative flex w-full flex-col items-center px-6 py-10 text-center text-text motion-safe:transition-colors motion-safe:duration-150 hover:border-gold-text has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-3 has-[a:focus-visible]:outline-(--focus-ring) has-[a:focus-visible]:outline-solid md:px-12 md:py-16"
+                className="relative flex w-full flex-col items-center px-3 py-5 text-center text-text motion-safe:transition-colors motion-safe:duration-150 hover:border-gold-text has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-3 has-[a:focus-visible]:outline-(--focus-ring) has-[a:focus-visible]:outline-solid md:px-6 md:py-9"
               >
-                {Icon && <Icon size={48} strokeWidth={1.5} className="text-gold-text" />}
-                <h3 className="mt-5 font-heading text-h4 text-ink">
+                {Icon && <Icon size={40} strokeWidth={1.5} className="size-8 text-gold-text md:size-10" />}
+                <h3 className="mt-3 font-heading text-body-lg hyphens-auto wrap-break-word text-ink md:mt-5 md:text-h4">
                   {/* Ring drawn on the card (has-[]), so the link itself needs none. */}
                   <Link
                     href={`/expertise#${item.id}`}
@@ -34,7 +34,7 @@ export function ExpertiseCards({ teaser }: { teaser: HomeContent["expertiseTease
                     {item.title}
                   </Link>
                 </h3>
-                <p className="mt-3 max-w-prose text-body-md text-muted">{item.body}</p>
+                <p className="mt-2 max-w-prose text-small text-muted md:mt-3 md:text-body">{item.body}</p>
               </Card>
             </li>
           );

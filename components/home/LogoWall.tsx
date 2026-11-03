@@ -15,16 +15,17 @@ export function LogoWall({ teaser, logos }: { teaser: HomeContent["transactionsT
           {teaser.cta.label}
         </ButtonLink>
       </div>
-      <ul className="mt-stack-lg grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-10 lg:gap-y-14">
+      {/* Flex-wrap + centered rows: an incomplete last row sits in the middle, not at the start. */}
+      <ul className="mt-stack-lg flex flex-wrap justify-center gap-x-8 gap-y-8 lg:gap-x-10">
         {logos.map((logo) => (
-          <li key={logo.src} className="flex min-h-16 items-center justify-center">
+          <li key={logo.src} className="flex h-12 w-32 items-center justify-center sm:w-36">
             <Image
               src={logo.src}
               alt={logo.alt}
               width={logo.width}
               height={logo.height}
-              sizes="(min-width: 1024px) 180px, 40vw"
-              className="h-auto max-h-10 w-auto max-w-full object-contain grayscale"
+              sizes="144px"
+              className="h-auto max-h-8 w-auto max-w-full object-contain grayscale"
             />
           </li>
         ))}

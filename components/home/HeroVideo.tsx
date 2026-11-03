@@ -90,9 +90,10 @@ export function HeroVideo({ video, labels }: Props) {
         type="button"
         onClick={toggle}
         aria-label={paused ? labels.play : labels.pause}
-        className="absolute end-4 bottom-4 inline-flex size-11 items-center justify-center rounded-full border border-on-ink/60 bg-ink/70 text-on-ink motion-safe:transition-colors motion-safe:duration-150 hover:border-on-ink hover:bg-ink-soft focus-visible:border-on-ink"
+        // Subtle on purpose (kept for WCAG 2.2.2): 32px (>= 24px target, 2.5.8), white icon on ink/70 stays >= 3:1.
+        className="absolute end-4 bottom-4 inline-flex size-8 items-center justify-center rounded-full bg-ink/70 text-on-ink/80 motion-safe:transition-colors motion-safe:duration-150 hover:bg-ink hover:text-on-ink focus-visible:bg-ink focus-visible:text-on-ink"
       >
-        {paused ? <PlayIcon size={20} /> : <PauseIcon size={20} />}
+        {paused ? <PlayIcon size={14} /> : <PauseIcon size={14} />}
       </button>
     </>
   );

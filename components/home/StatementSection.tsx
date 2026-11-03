@@ -1,5 +1,6 @@
 import type { HomeContent, Link } from "@/content/types";
 import { ButtonLink } from "@/components/ui/Button";
+import { Lines } from "@/components/ui/Lines";
 import { Section } from "@/components/ui/Section";
 import { SectionIntro } from "./SectionIntro";
 
@@ -8,10 +9,12 @@ export function StatementSection({ philosophy, cta }: { philosophy: HomeContent[
   const id = "statement-title";
   return (
     <Section variant="plain" tone="light" aria-labelledby={id}>
-      <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-15">
-        <SectionIntro id={id} title={philosophy.title} size="h2" marker uppercase />
+      <div className="grid gap-8 lg:grid-cols-[auto_minmax(0,1fr)] lg:items-center lg:gap-12">
+        <SectionIntro id={id} title={philosophy.title} size="h3" marker uppercase />
         <div>
-          <p className="max-w-lead text-body-lg text-muted">{philosophy.body}</p>
+          <p className="max-w-lead text-body-lg text-muted lg:max-w-none lg:text-body-md">
+            <Lines text={philosophy.body} />
+          </p>
           {cta && (
             <ButtonLink href={cta.href} variant="outline" arrow className="mt-8">
               {cta.label}

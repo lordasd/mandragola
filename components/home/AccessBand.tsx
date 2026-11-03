@@ -23,7 +23,7 @@ export function AccessBand({ access, image }: { access: HomeContent["access"]; i
         aria-hidden="true"
         className="absolute inset-0 -z-10 bg-ink/80 lg:bg-transparent lg:from-ink/90 lg:via-ink/80 lg:to-ink/40 ltr:lg:bg-linear-to-r rtl:lg:bg-linear-to-l"
       />
-      <div className="max-w-180 py-6 lg:py-12">
+      <div className="max-w-180 py-6 lg:max-w-none lg:py-12">
         <SectionIntro
           id={id}
           eyebrow={access.eyebrow}
@@ -32,6 +32,7 @@ export function AccessBand({ access, image }: { access: HomeContent["access"]; i
           size="h3"
           tone="ink"
           uppercase
+          leadClassName="lg:max-w-none"
         />
         <ButtonLink href={access.cta.href} variant="gold" tone="ink" arrow className="mt-8">
           {access.cta.label}

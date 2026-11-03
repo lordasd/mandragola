@@ -30,7 +30,7 @@ export const home: HomeContent = {
   mission: {
     eyebrow: "Our Mission",
     title: "Identifying and developing high-potential growth opportunities",
-    body: "With a focus on the A&D sector, we have strong relationships in the Aerospace & Aviation industry through our global partnerships, as well as across the Israeli tech ecosystem.",
+    body: "With a focus on the A&D sector, we have strong relationships in the Aerospace & Aviation industry\nthrough our global partnerships, as well as across the Israeli tech ecosystem.",
   },
   stats: [
     { value: "100+", label: "Financing Transactions" },
@@ -38,22 +38,22 @@ export const home: HomeContent = {
     { value: "Thousands", label: "Underlying Shareholders" },
   ],
   philosophy: {
-    title: "Capital. Access. Strategic execution.",
+    title: "Capital. Access.\nStrategic execution.",
     body: "Mandragola was built on the belief that capital alone does not create lasting value. The right relationships, sound judgment, and disciplined execution are what turn opportunity into progress.",
   },
   access: {
     eyebrow: "Strategic access",
     title: "Where capital meets opportunity",
-    body: "Mandragola enables access to strategically important sectors through targeted public and private investments.",
+    body: "Mandragola enables access to strategically important\nsectors through targeted public and private investments.",
     cta: { label: "Discover More", href: `${ORIGIN}/values/` },
   },
   transactionsTeaser: {
     title: "Transactions",
-    body: "Selected M&A, joint ventures, and financing transactions",
+    body: "Selected M&A, Joint Ventures, and Financing Transactions",
     cta: { label: "Discover Transactions", href: "/transactions" },
   },
   expertiseTeaser: {
-    title: "Experience that extends beyond capital",
+    title: "Experience that extends\nbeyond capital",
     items: [
       {
         id: "capital-markets",
@@ -85,7 +85,7 @@ export const home: HomeContent = {
   contact: {
     eyebrow: "Contact Us",
     title: "Get in touch",
-    body: "Connecting companies, investors, and industry leaders across international markets.",
+    body: "Connecting companies, investors, and industry leaders\nacross international markets.",
   },
 };
 
