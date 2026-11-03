@@ -9,13 +9,13 @@
 - **Accessibility:** WCAG 2.2 AA (IS 5568) with native markup: skip link, visible focus, keyboard menu, inline form errors, 320px reflow, reduced motion, plus an [accessibility statement](https://mandragola-rebuild.vercel.app/accessibility).
 
 ## Lighthouse (mobile, median of 3, Lighthouse 13.6)
-| Page (original → rebuild) | Performance | Accessibility | SEO |
-|---|---|---|---|
-| Home | 81 → **93** | 94 → **100** | 92 → 69* |
-| Expertise | n/a → **96** | 94 → **100** | 85 → 69* |
-| Transactions | 98† → **94** | 94 → **100** | 85 → 69* |
+| Page (original → rebuild) | Performance | Accessibility | Best practices | SEO |
+|---|---|---|---|---|
+| Home | 81 → **93** | 94 → **100** | 73 → **100** | 92 → 69* |
+| Expertise | n/a → **96** | 94 → **100** | 73 → **100** | 85 → 69* |
+| Transactions | 98† → **94** | 94 → **100** | 73 → **100** | 85 → 69* |
 
-Home LCP 4.3 s → 1.2 s, page weight 1.96 MB → 391 KB. Best practices 73 → 100 on every page. \*The SEO drop comes only from the `noindex` the brief requires (`is-crawlable`); every other SEO audit passes. †Original measured with a warm cache. [Full data](docs/lighthouse/rebuild/summary.md).
+Home LCP 4.3 s → 1.2 s, page weight 1.96 MB → 391 KB. \*The SEO drop comes only from the `noindex` the brief requires (`is-crawlable`); every other SEO audit passes. †Original measured with a warm cache. [Full data](docs/lighthouse/rebuild/summary.md).
 
 ## How I worked with AI
 **Tools:** Claude Code (Opus 5.5): plan mode first, then parallel subagents, each owning its own folders (design via Figma MCP, content, shell, one per page, then SEO, code-review and WCAG audits). Shared rules live in [`AGENTS.md`](AGENTS.md) and [`.claude/rules`](.claude/rules). I reviewed every report, made the commits, and checked results with screenshots, axe and Lighthouse ([log](docs/ai-log.md)).
