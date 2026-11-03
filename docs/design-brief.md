@@ -124,8 +124,8 @@ Set `--banner-h` (CSS var, 40px; 56px under 400px) → `body { padding-top: var(
 
 **Header / nav** (Figma `1:304`): sticky `top: var(--banner-h)`; outer padding `12px gutter` (desktop `30px 40px`
 → use `16px` to save height); inner bar bg `--color-ink`, radius `--radius-nav`, padding `12px 16px` → `20px 40px` ≥1024,
-`--header-h` 64 mobile / 84 desktop. Bar has a 1px `--color-line-on-ink` (#FFFFFF26) border + soft ink shadow so it stays distinct over ink section cards (decorative edge, not a control boundary). Left: white Mandragola logo (`Mandragola-Logo-Investments-Limited-White.svg`,
-height 36 → 44, `alt="Mandragola Investments Limited – home"`). Center (≥1024): links Home · Expertise ·
+`--header-h` 72 mobile / 96 desktop bar. Bar has a 1px `--color-line-on-ink` (#FFFFFF26) border + soft ink shadow so it stays distinct over ink section cards (decorative edge, not a control boundary). Left: white Mandragola logo (`Mandragola-Logo-Investments-Limited-White.svg`,
+height 52 → 72, `alt="Mandragola Investments Limited – home"`). Center (≥1024): links Home · Expertise ·
 Transactions · Contact (anchor `#contact`), sans 16px white, gap 32, current page `aria-current="page"` + 2px gold
 underline offset 6px. Right: language switch "עברית"/"English" (`lang` attr on link, `hreflang`) + outline button
 "Contact" (white 1px border, radius 10, px 20 py 10). Hover: underline/gold. All targets ≥44px tall.
@@ -185,7 +185,7 @@ No hover motion except border → line-strong. Cards are not links (no detail pa
 **Logo wall** (home teaser): sunken section card, eyebrow "TRANSACTIONS", H2, then 2 / 3 / 4 col grid of logos
 (height 32–40, `filter: grayscale(1)`, opacity 1 — keep contrast), button "Discover transactions".
 
-**CTA band** (Figma `1:200`): ink section card, 2 cols ≥1024: H2 white "Let's build what comes next" + lead
+**CTA band** (Figma `1:200`) — *removed: every page now ends with the Contact section instead (one contact block per page).* Was: ink section card, 2 cols ≥1024: H2 white "Let's build what comes next" + lead
 on-ink-muted, gold button "Contact us"; right: gold marker line or logo icon (`Original_Logo_Icon.svg`, white, 160px,
 decorative). Mobile stacked, padding section tokens. Drop globe illustration.
 
@@ -193,17 +193,17 @@ decorative). Mobile stacked, padding section tokens. Drop globe illustration.
 info column first (it is short). Info column: ink card radius-card, padding `32px 24px` → `90px 50px`, groups with
 eyebrow (gold) + 16px white text: OFFICE "8 HaGavish, Netanya, Israel" · EMAIL `info@mandragolaltd.com` (mailto,
 underline) · SOCIAL icon links LinkedIn/Facebook/X, 44×44, `aria-label`. Form column: eyebrow "CONTACT", H2
-"Let's talk", body muted. Fields: Name (`autocomplete="name"`), Email (`email`), Company (`organization`, optional),
-Message (textarea, 6 rows). Each: visible `<label>` above (16px 600 ink, "(required)" in text), input raised bg,
+"Let's talk", body muted. Fields: Full name (`autocomplete="name"`), Phone (`tel`), Email (`email`), Sector (text, optional), Company
+(`organization`, optional). Each: visible `<label>` above (16px 600 ink; required = "*" + sr-only "(required)",
+optional = visible "(optional)"), input raised bg,
 1px line-strong border, radius 10, padding 14px 16px, min-height 48; focus = focus ring + border ink; error text
-danger 14px with icon, linked via `aria-describedby`. Note above button: "This is a demo — messages are not sent or
-stored." Submit primary full-width "Send message"; on submit `preventDefault` and show status in `aria-live="polite"`
+danger 14px with icon, linked via `aria-describedby`. Submit primary full-width "Send message"; on submit `preventDefault` and show status in `aria-live="polite"`
 region. No CAPTCHA.
 
 **Footer** (Figma `1:199`): ink block with top radius `--radius-section` (35 in template) at container width, padding
-`48px 24px 24px` → `60px 40px 30px`. Row 1: logo white (height 48) + columns (stack on mobile, 3 cols ≥768): "Company"
-(Home, Expertise, Transactions), "Contact" (address, email), "Legal" (Accessibility statement only;
-no privacy/terms pages in scope). Headings 16px 600 white; links 16px on-ink-muted → white on hover, underline on focus/hover,
+`48px 24px 24px` → `60px 40px 30px`. Row 1: logo white (height 64 → 96) + link groups (stack on mobile, row ≥1024): "Company" (2-col grid, 3 at ≥640)
+(Home, Expertise, Transactions), "Legal" (Accessibility statement only;
+no privacy/terms pages in scope). No contact column: address/email/social live in the Contact section next to the form. Headings 16px 600 white; links 16px on-ink-muted → white on hover, underline on focus/hover,
 row height ≥32. Hairline `#FFFFFF26`. Bottom row: "© 2026 Mandragola Ltd. Demo rebuild." + language switch.
 
 ## 5. Page compositions
@@ -214,21 +214,21 @@ row height ≥32. Hairline `#FFFFFF26`. Bottom row: "© 2026 Mandragola Ltd. Dem
 · 4. Statement: 2 cols, H2 uppercase "Capital. Access. Strategic execution." + marker line | body + outline btn
 "Our approach" (→ /expertise) · 5. "Where capital meets opportunity": image card (`Cover-ImageB-scaled.jpg` aerial,
 radius-section, ink overlay) with H2 + lead + gold btn · 6. Logo wall → /transactions · 7. 2×2 expertise cards
-(`1:209`) · 8. CTA band (`1:200`) · 9. Contact (`1:532`) · 10. Footer.
+(`1:209`) · 8. Contact (`1:532`) · 9. Footer.
 
 **Expertise `/expertise`** (Services frame `1:305`)
 1. Page head (surface, no card): eyebrow "EXPERTISE", H1 "Experience that extends beyond capital", marker line,
 lead (forecasting/valuation paragraph) · 2. Four alternating rows (`1:307`/`1:320`) with ids `capital-markets`,
 `company-building`, `strategic-relationships`, `opportunity-sourcing`; images `Expertise-Financial-markets-1-*.png`,
 `Expertise-Business-operations.png`, `Expertise-Investment-platforms-1.png`, `Expertise-Tech-investing.png` (match
-original order) · 3. CTA band · 4. Contact (compact: form only optional — reuse full section) · 5. Footer.
+original order) · 3. Contact (full section) · 4. Footer.
 Skip the template features block `1:333` (no real content).
 
 **Transactions `/transactions`** (Blog grid `1:504` + card `1:265`)
 1. Page head on sunken section card: eyebrow "TRANSACTIONS", H1 "Our transactions & investments", lead (philosophy
 paragraph, split into 2 short paragraphs) · 2. Stats row (same 3 real stats) · 3. Grid of 13 transaction cards in
 original order (DFSL&Tessera, Zorronet&Tessera, MIA Dynamics, Enigma, T3 Defense&Star26, ArrivAir II, DentFreak,
-OmegaMore, Kochav, Continual&Shikun & Binui, Motomea (status Pending), VersaMed) · 4. CTA band · 5. Footer.
+OmegaMore, Kochav, Continual&Shikun & Binui, Motomea (status Pending), VersaMed) · 4. Contact (same section as Expertise) · 5. Footer.
 No filters (zero JS); sector chips are plain text.
 
 ## 6. Drop from template / imagery
