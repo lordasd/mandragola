@@ -29,7 +29,7 @@ Trade-off: TBT rose from ~50 ms (WordPress, mostly static HTML) to ~210–280 ms
 ## Iterations
 1. First live measurement: `/` 87, `/he` 86 (LCP 2.9–3.2 s). The LCP element was a decorative 1 KB hero gradient image under an 85% overlay, plus all 4 font families (6 files, 191 KB) preloaded on every page.
 2. Fixes: hero background made pure CSS (h1 text becomes LCP); fonts split per locale and Hebrew font not preloaded (root-layout fonts preload on every route); modern `browserslist`; cache headers for `/images`.
-3. Result above: `/` 95, `/he` 94.
+3. Result after fixes: `/` 95, `/he` 94.
 4. Polish round (header hairline, CSS scroll reveal, desktop-only hero video): mobile re-run ×3 — `/` 96/93/92 (median **93**), `/he` 93/92/99 (median **93**), within run-to-run noise of step 3; mobile never downloads the video. **Desktop preset** `/`: Perf **100**, LCP 0.6 s, CLS 0, with the 1.25 MB video loaded after the page ([home.desktop.json](home.desktop.json)).
 
 5. Final re-run after the layout polish (full-width header and hero, contact section on every inner page): table above. Within run-to-run noise of steps 3–4.
