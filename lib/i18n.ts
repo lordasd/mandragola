@@ -46,7 +46,7 @@ export const ui: Record<Locale, UiStrings> = {
     accessibility: "Accessibility statement",
     emailLabel: "Email",
     switchLanguage: { label: "עברית", hrefLang: "he", lang: "he" },
-    demoBanner: "Demo for a recruitment assignment — not the official Mandragola website",
+    demoBanner: "Demo for a recruitment assignment, not the official Mandragola website",
     demoBannerLabel: "Demo notice",
   },
   he: {
@@ -67,7 +67,7 @@ export const ui: Record<Locale, UiStrings> = {
     accessibility: "הצהרת נגישות",
     emailLabel: "דוא״ל",
     switchLanguage: { label: "English", hrefLang: "en", lang: "en" },
-    demoBanner: "אתר הדגמה למטלת גיוס — אינו האתר הרשמי של מנדרגולה",
+    demoBanner: "הדגמה למשימת גיוס, לא האתר הרשמי של Mandragola",
     demoBannerLabel: "הודעת הדגמה",
   },
 };

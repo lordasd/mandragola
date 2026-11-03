@@ -39,7 +39,7 @@ export const site: SiteContent = {
     { label: "Values", href: `${ORIGIN}/values/` },
     { label: "Articles", href: `${ORIGIN}/articles/` },
   ],
-  demoBanner: "Demo for a recruitment assignment — not the official Mandragola website",
+  demoBanner: "Demo for a recruitment assignment, not the official Mandragola website",
 };
 
 /** Hebrew wording of the site strings shown in the /he chrome (layout metadata, footer, contact card). */

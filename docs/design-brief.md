@@ -115,8 +115,8 @@ Section card = `<section>` with bg (ink / raised / sunken), `border-radius: var(
 
 **Demo banner** (`DemoBanner`, every page): `position: fixed; top: 0; inset-inline: 0; z-index: 60`; bg `--color-gold`,
 text `--color-ink` 14px/600, centered, `min-height: 40px`, padding 8px 16px, wraps on mobile (≈56px at 320).
-Text: "Demo for a recruitment assignment — not the official Mandragola website" (HE: "אתר הדגמה למטלת גיוס — אינו
-האתר הרשמי של מנדרגולה"). Rendered as `<div role="note">` before the skip link's target, not inside `<header>`.
+Text: "Demo for a recruitment assignment, not the official Mandragola website" (HE: "הדגמה למשימת גיוס, לא
+האתר הרשמי של Mandragola"). Rendered as `<div role="note">` before the skip link's target, not inside `<header>`.
 Set `--banner-h` (CSS var, 40px; 56px under 400px) → `body { padding-top: var(--banner-h) }`,
 `html { scroll-padding-top: calc(var(--banner-h) + var(--header-h) + 16px) }` (2.4.11).
 
