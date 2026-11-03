@@ -15,7 +15,7 @@ export function TransactionGrid({
 }) {
   return (
     <Container className="py-section-gap-half">
-      <ul aria-label={listLabel} className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-7.5">
+      <ul aria-label={listLabel} className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
         {items.map((item) => (
           <li key={item.id}>
             <TransactionCard item={item} labels={labels} />

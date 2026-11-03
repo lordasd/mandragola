@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Fragment } from "react";
 import type { Party, Transaction } from "@/content/types";
 import { Card } from "@/components/ui/Card";
+import { cn } from "@/lib/cn";
 
 export interface TransactionCardLabels {
   /** "Mandragola's role" */
@@ -21,13 +22,15 @@ export function partyNames(item: Pick<Transaction, "parties">): string {
  * Presentational: the card's h2 already names the parties, so logos are alt="" inside an aria-hidden row.
  * Logo box: 40px tall, max 140px wide, object-contain. Wide wordmarks (T3 Defense 275×27, MIA 233×27) are capped by
  * width and render shorter; tall marks (ArrivAir II 163×97) are capped by height. max-w-35 = 140px.
+ * Near-square marks (aspect < 2, i.e. ArrivAir II) get a 64px box, where 40px left them tiny.
  */
 function PartyMark({ party }: { party: Party }) {
   if (!party.logo) {
     return <span className="min-w-0 font-heading text-h4 text-ink">{party.name}</span>;
   }
+  const tall = party.logo.width / party.logo.height < 2;
   return (
-    <span className="flex h-10 min-w-0 max-w-35 shrink items-center">
+    <span className={cn("flex min-w-0 max-w-35 shrink items-center", tall ? "h-16" : "h-10")}>
       <Image
         src={party.logo.src}
         alt=""
@@ -48,7 +51,8 @@ export function TransactionCard({ item, labels }: { item: Transaction; labels: T
   return (
     <Card
       as="article"
-      className="reveal flex h-full flex-col gap-5 motion-safe:transition-colors motion-safe:duration-150 hover:border-line-strong"
+      compact
+      className="reveal flex h-full flex-col gap-4 md:gap-5 motion-safe:transition-colors motion-safe:duration-150 hover:border-line-strong"
     >
       {/* h2 = party names (page outline: h1 → card h2s → CTA h2). Visually the logo row carries it. */}
       {hasLogo ? (
@@ -56,25 +60,17 @@ export function TransactionCard({ item, labels }: { item: Transaction; labels: T
       ) : (
         <h2 className="order-1 font-heading text-h4 text-ink">{title}</h2>
       )}
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <ul aria-label={labels.tags} className="flex flex-wrap gap-2">
-          {item.sectors.map((sector) => (
-            <li key={sector} className="rounded-pill bg-surface-sunken px-3 py-1 text-small font-semibold text-text">
-              {sector}
-            </li>
-          ))}
-          <li className="rounded-pill border border-line-strong px-3 py-1 text-small font-semibold text-gold-text">
-            {item.type}
+      {/* 12px chips between 1024 and 1440 (3-col cards are narrowest there) so the longest set, Motomea's three, stays on one row. */}
+      <ul aria-label={labels.tags} className="flex flex-wrap gap-1.5">
+        {item.sectors.map((sector) => (
+          <li key={sector} className="rounded-pill bg-surface-sunken px-2.5 py-1 text-small font-semibold text-text lg:max-[90rem]:text-xs">
+            {sector}
           </li>
-        </ul>
-        {item.status && (
-          <p className="inline-flex items-center gap-1.5 rounded-pill bg-surface-sunken px-3 py-1 text-small font-semibold text-ink">
-            <span aria-hidden="true" className="size-2 rounded-pill bg-gold-text" />
-            <span className="sr-only">{labels.status} </span>
-            {item.status}
-          </p>
-        )}
-      </div>
+        ))}
+        <li className="rounded-pill border border-line-strong px-2.5 py-1 text-small font-semibold text-gold-text lg:max-[90rem]:text-xs">
+          {item.type}
+        </li>
+      </ul>
 
       {hasLogo && (
         <div aria-hidden="true" className="order-1 flex min-h-16 flex-wrap items-center gap-x-4 gap-y-2">
@@ -85,6 +81,15 @@ export function TransactionCard({ item, labels }: { item: Transaction; labels: T
             </Fragment>
           ))}
         </div>
+      )}
+
+      {/* Under the logo row (DOM order = visual order, both order-1). */}
+      {item.status && (
+        <p className="order-1 inline-flex items-center gap-1.5 self-start text-small font-semibold text-gold-text">
+          <span aria-hidden="true" className="size-2 rounded-pill bg-gold-text" />
+          <span className="sr-only">{labels.status} </span>
+          {item.status}
+        </p>
       )}
 
       <p className="order-2 font-sans text-body-md font-medium text-ink">{item.summary}</p>
