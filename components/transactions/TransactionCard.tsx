@@ -73,7 +73,8 @@ export function TransactionCard({ item, labels }: { item: Transaction; labels: T
       </ul>
 
       {hasLogo && (
-        <div aria-hidden="true" className="order-1 flex min-h-16 flex-wrap items-center gap-x-4 gap-y-2">
+        // No wrap: a deal has at most two parties, and each PartyMark (min-w-0, shrink) scales down to share one row.
+        <div aria-hidden="true" className="order-1 flex min-h-16 items-center gap-3 md:gap-4">
           {item.parties.map((party, i) => (
             <Fragment key={party.name}>
               {i > 0 && <span className="font-heading text-h4 leading-none text-muted">&amp;</span>}
